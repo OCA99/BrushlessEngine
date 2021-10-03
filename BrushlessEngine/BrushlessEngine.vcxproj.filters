@@ -61,6 +61,12 @@
     <ClCompile Include="src\ModuleWindow.cpp">
       <Filter>modules</Filter>
     </ClCompile>
+    <ClCompile Include="src\ExitWindow.cpp">
+      <Filter>ui_components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainMenuBar.cpp">
+      <Filter>ui_components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -126,6 +132,15 @@
     <ClInclude Include="src\ModuleWindow.h">
       <Filter>modules</Filter>
     </ClInclude>
+    <ClInclude Include="src\UIComponent.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ExitWindow.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MainMenuBar.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
@@ -148,6 +163,9 @@
     </Filter>
     <Filter Include="modules">
       <UniqueIdentifier>{ce3ffc26-a81f-4b05-a3ce-0ad19f85084d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui_components">
+      <UniqueIdentifier>{d235b4ca-976f-4f2c-8991-e34f218c3143}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

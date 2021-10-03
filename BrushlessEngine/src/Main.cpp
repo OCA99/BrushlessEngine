@@ -2,8 +2,6 @@
 #include "Application.h"
 #include "Globals.h"
 
-
-
 #include "libraries/SDL/include/SDL.h"
 #pragma comment( lib, "SDL2.lib" )
 #pragma comment( lib, "SDL2main.lib" )

@@ -4,12 +4,17 @@
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
 
+#include "ExitWindow.h"
+#include "MainMenuBar.h"
+
 #include <iostream>
 
 #include "libraries/imgui/imgui.h"
 #include "libraries/imgui/imgui_internal.h"
 #include "libraries/imgui/imgui_impl_sdl.h"
 #include "libraries/imgui/imgui_impl_opengl2.h"
+
+#include "libraries/json/json.hpp"
 
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -58,6 +63,8 @@ bool ModuleEditor::Start()
 	LOG("Setting up the editor");
 	bool ret = true;
 
+	InitializeUI();
+
 	return ret;
 }
 
@@ -78,50 +85,14 @@ update_status ModuleEditor::Update(float dt)
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	DoStyle();
-	{
-
-		//SINGLE FRAME
-		ImGui::Begin("WELCOME TO BrushlessEngine");
-		ImGui::Text("BrushlessEngine developed by Brushless Studios.");
-		ImGui::End();
-
-		//MAIN MENU
-		ImGui::BeginMainMenuBar();
-		{
-			if (ImGui::BeginMenu("Edit"))
-			{
-				ImGui::MenuItem("Exit", "esc", &engineOpen);
-				ImGui::EndMenu();
-			} 
-			if (ImGui::BeginMenu("Files"))
-			{
-				ImGui::MenuItem("Save", "cntr + s");
-				ImGui::MenuItem("Load", "cntr + l");
-				ImGui::EndMenu();
-			} 
-
+	std::vector<UIComponent*>::iterator it = components->begin();
+	while (it != components->end()) {
+		if ((*it)->enabled == nullptr || *(*it)->enabled) {
+			if ((*it)->PreUpdate() == UPDATE_STOP) return UPDATE_STOP;
+			if ((*it)->Update() == UPDATE_STOP) return UPDATE_STOP;
+			if ((*it)->PostUpdate() == UPDATE_STOP) return UPDATE_STOP;
 		}
-		ImGui::EndMainMenuBar();
-
-		//EXIT
-		if (!engineOpen)
-		{
-			ImGui::Begin("Exit", nullptr, ImGuiWindowFlags_NoCollapse);
-			ImGui::Columns(2);
-			ImGui::SetColumnOffset(1, 100.0f);
-			if (ImGui::Button("YES", ImVec2(75, 50)))
-				ret = UPDATE_STOP;
-
-			ImGui::NextColumn();
-			if (ImGui::Button("NO", ImVec2(75, 50)))
-				engineOpen = true;
-
-			ImGui::End();
-		}
-
-
-		// Any application code here
+		it++;
 	}
 
 	return ret;
@@ -140,9 +111,21 @@ update_status ModuleEditor::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
+void ModuleEditor::AddComponent(UIComponent* component)
+{
+	components->push_back(component);
+}
+
+void ModuleEditor::RemoveComponent(UIComponent* component)
+{
+	components->erase(std::remove(components->begin(), components->end(), component), components->end());
+}
+
 bool ModuleEditor::CleanUp()
 {
 	LOG("Cleaning editor");
+
+	components->clear();
 
 	// Shutdown
 	ImGui_ImplOpenGL2_Shutdown();
@@ -152,12 +135,9 @@ bool ModuleEditor::CleanUp()
 	return true;
 }
 
-void ModuleEditor::DoStyle()
+void ModuleEditor::InitializeUI()
 {
-	ImGuiStyle& style = ImGui::GetStyle();
-	style.Colors[ImGuiCol_Text] = ImColor(255, 255, 255, 255);
-	style.Colors[ImGuiCol_Border] = ImColor(255, 255, 255, 255);
-	style.Colors[ImGuiCol_MenuBarBg] = ImColor(190, 199, 204, 100);
-	style.Colors[ImGuiCol_FrameBg] = ImColor(229, 152, 155, 255);
+	AddComponent(new ExitWindow(App, &state.exitWindowOpen, "Exit application?", nullptr, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new MainMenuBar(App, nullptr, "Title bar", nullptr, ImGuiWindowFlags_NoCollapse));
 }
 

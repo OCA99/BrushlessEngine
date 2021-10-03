@@ -97,8 +97,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)src\libraries\SDL\lib\x86;$(ProjectDir)src\libraries\Glew\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\libraries\MathGeoLib\libx86\Debug;$(ProjectDir)src\libraries\SDL\lib\x86;$(ProjectDir)src\libraries\Glew\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;MathGeoLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ExitWindow.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Color.cpp" />
     <ClCompile Include="src\glmath.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\log.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MainMenuBar.cpp" />
     <ClCompile Include="src\ModuleCamera3D.cpp" />
     <ClCompile Include="src\ModuleEditor.cpp" />
     <ClCompile Include="src\ModuleInput.cpp" />
@@ -171,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Color.h" />
+    <ClInclude Include="src\ExitWindow.h" />
     <ClInclude Include="src\glmath.h" />
     <ClInclude Include="src\Globals.h" />
     <ClInclude Include="src\libraries\imgui\imconfig.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="src\libraries\imgui\imstb_textedit.h" />
     <ClInclude Include="src\libraries\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Light.h" />
+    <ClInclude Include="src\MainMenuBar.h" />
     <ClInclude Include="src\Module.h" />
     <ClInclude Include="src\ModuleCamera3D.h" />
     <ClInclude Include="src\ModuleEditor.h" />
@@ -190,6 +194,7 @@
     <ClInclude Include="src\ModuleWindow.h" />
     <ClInclude Include="src\Primitive.h" />
     <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\UIComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
