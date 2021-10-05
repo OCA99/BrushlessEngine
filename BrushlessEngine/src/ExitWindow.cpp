@@ -1,6 +1,6 @@
 #include "ExitWindow.h"
 
-ExitWindow::ExitWindow(Application* app, bool* enabled, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, enabled, title, open, flags)
+ExitWindow::ExitWindow(Application* app, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, title, open, flags)
 {}
 
 update_status ExitWindow::Update() {
@@ -13,7 +13,7 @@ update_status ExitWindow::Update() {
 
 	ImGui::NextColumn();
 	if (ImGui::Button("NO", ImVec2(75, 50))) {
-		*enabled = false;
+		*open = false;
 	}
 
 	return ret;

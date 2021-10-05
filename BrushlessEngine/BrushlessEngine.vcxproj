@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ConfigurationWindow.cpp" />
+    <ClCompile Include="src\DemoWindow.cpp" />
     <ClCompile Include="src\ExitWindow.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Color.cpp" />
@@ -173,6 +175,8 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Color.h" />
+    <ClInclude Include="src\ConfigurationWindow.h" />
+    <ClInclude Include="src\DemoWindow.h" />
     <ClInclude Include="src\ExitWindow.h" />
     <ClInclude Include="src\glmath.h" />
     <ClInclude Include="src\Globals.h" />

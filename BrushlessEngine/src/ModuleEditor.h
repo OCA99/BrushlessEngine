@@ -10,7 +10,10 @@
 class UIComponent;
 
 struct EditorState {
+	char applicationName[64];
 	bool exitWindowOpen = false;
+	bool configurationWindowOpen = false;
+	bool demoWindowOpen = false;
 };
 
 class ModuleEditor : public Module

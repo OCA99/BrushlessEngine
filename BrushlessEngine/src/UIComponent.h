@@ -10,14 +10,12 @@
 class UIComponent {
 public:
 	Application* app;
-	bool* enabled;
 	std::string title;
 	bool* open = nullptr;
 	ImGuiWindowFlags flags;
 
-	UIComponent(Application* app, bool* enabled, std::string title, bool* open, ImGuiWindowFlags flags) {
+	UIComponent(Application* app, std::string title, bool* open, ImGuiWindowFlags flags) {
 		this->app = app;
-		this->enabled = enabled;
 		this->title = title;
 		this->open = open;
 		this->flags = flags;

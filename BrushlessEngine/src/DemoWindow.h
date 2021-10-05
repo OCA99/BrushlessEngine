@@ -2,10 +2,10 @@
 
 #include "UIComponent.h"
 
-class MainMenuBar : public UIComponent
+class DemoWindow : public UIComponent
 {
 public:
-	MainMenuBar(Application* app, std::string title, bool* open, ImGuiWindowFlags flags);
+	DemoWindow(Application* app, std::string title, bool* open, ImGuiWindowFlags flags);
 	update_status PreUpdate() override;
 	update_status Update() override;
 	update_status PostUpdate() override;

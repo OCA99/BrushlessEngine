@@ -6,6 +6,8 @@
 
 #include "ExitWindow.h"
 #include "MainMenuBar.h"
+#include "ConfigurationWindow.h"
+#include "DemoWindow.h"
 
 #include <iostream>
 
@@ -18,7 +20,6 @@
 
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-
 }
 
 ModuleEditor::~ModuleEditor()
@@ -39,14 +40,6 @@ bool ModuleEditor::Init()
 	// TODO: Load TTF/OTF fonts if you don't want to use the default font.
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-	io.Fonts->AddFontFromFileTTF("Assets/Fonts/brandon.ttf", 25.0f);
-	//io.Fonts->AddFontFromFileTTF("Assets/Fonts/Ephesis-Regular.ttf", 25.0f);
-	//io.Fonts->AddFontFromFileTTF("Assets/Fonts/font.ttf", 25.0f);
-	//io.Fonts->AddFontFromFileTTF("Assets/Fonts/Rajdhani-Medium.ttf", 25.0f);
-
-	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;  //This Enables Using multiple view ports
-
-	//ImGui::SmallButton("Exit");
 
 	// Initialize helper Platform and Renderer backends (here we are using imgui_impl_win32.cpp and imgui_impl_dx11.cpp)
 	ImGui_ImplOpenGL2_Init();
@@ -54,6 +47,8 @@ bool ModuleEditor::Init()
 
 	//Style Initialization
 	ImGui::StyleColorsClassic();
+
+	memset(state.applicationName, 0, 64);
 
 	return ret;
 }
@@ -87,7 +82,7 @@ update_status ModuleEditor::Update(float dt)
 
 	std::vector<UIComponent*>::iterator it = components->begin();
 	while (it != components->end()) {
-		if ((*it)->enabled == nullptr || *(*it)->enabled) {
+		if ((*it)->open == nullptr || *(*it)->open) {
 			if ((*it)->PreUpdate() == UPDATE_STOP) return UPDATE_STOP;
 			if ((*it)->Update() == UPDATE_STOP) return UPDATE_STOP;
 			if ((*it)->PostUpdate() == UPDATE_STOP) return UPDATE_STOP;
@@ -137,7 +132,9 @@ bool ModuleEditor::CleanUp()
 
 void ModuleEditor::InitializeUI()
 {
-	AddComponent(new ExitWindow(App, &state.exitWindowOpen, "Exit application?", nullptr, ImGuiWindowFlags_NoCollapse));
-	AddComponent(new MainMenuBar(App, nullptr, "Title bar", nullptr, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new ExitWindow(App, "Exit application?", &state.exitWindowOpen, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new MainMenuBar(App, "Title bar", nullptr, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new ConfigurationWindow(App, "Configuration", &state.configurationWindowOpen, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new DemoWindow(App, "Demo", &state.demoWindowOpen, ImGuiWindowFlags_NoCollapse));
 }
 

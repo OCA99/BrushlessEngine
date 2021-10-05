@@ -67,6 +67,12 @@
     <ClCompile Include="src\MainMenuBar.cpp">
       <Filter>ui_components</Filter>
     </ClCompile>
+    <ClCompile Include="src\ConfigurationWindow.cpp">
+      <Filter>ui_components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DemoWindow.cpp">
+      <Filter>ui_components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -139,6 +145,12 @@
       <Filter>ui_components</Filter>
     </ClInclude>
     <ClInclude Include="src\MainMenuBar.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ConfigurationWindow.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DemoWindow.h">
       <Filter>ui_components</Filter>
     </ClInclude>
   </ItemGroup>

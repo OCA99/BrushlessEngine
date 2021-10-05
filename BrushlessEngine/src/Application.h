@@ -35,9 +35,12 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-private:
+	int targetFPS = 60;
 
+private:
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
+
+	int frameStart = 0;
 };

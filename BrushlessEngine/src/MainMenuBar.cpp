@@ -1,6 +1,6 @@
 #include "MainMenuBar.h"
 
-MainMenuBar::MainMenuBar(Application* app, bool* enabled, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, enabled, title, open, flags)
+MainMenuBar::MainMenuBar(Application* app, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, title, open, flags)
 {}
 
 update_status MainMenuBar::PreUpdate() {
@@ -24,6 +24,12 @@ update_status MainMenuBar::Update() {
 	}
 	if (ImGui::BeginMenu("Edit"))
 	{
+		ImGui::MenuItem("Settings", nullptr, &app->editor->state.configurationWindowOpen);
+		ImGui::EndMenu();
+	}
+	if (ImGui::BeginMenu("Help"))
+	{
+		ImGui::MenuItem("Demo", nullptr, &app->editor->state.demoWindowOpen);
 		ImGui::EndMenu();
 	}
 

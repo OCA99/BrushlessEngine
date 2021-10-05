@@ -60,13 +60,22 @@ bool Application::Init()
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
-	dt = (float)ms_timer.Read() / 1000.0f;
-	ms_timer.Start();
+	frameStart = ms_timer.Read();
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	int frameEnd = ms_timer.Read();
+
+	int deltaMilliseconds = frameEnd - frameStart;
+	dt = (float)deltaMilliseconds / 1000.0f;
+
+	float targetDt = 1000.0f / (float)targetFPS;
+	if (dt < targetDt) {
+		SDL_Delay(targetDt - dt);
+		dt = targetDt;
+	}
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
