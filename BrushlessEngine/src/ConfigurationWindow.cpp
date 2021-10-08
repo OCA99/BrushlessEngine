@@ -1,7 +1,15 @@
 #include "ConfigurationWindow.h"
 
 ConfigurationWindow::ConfigurationWindow(Application* app, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, title, open, flags)
-{}
+{
+	initialWinSize = 100;
+	initialWinAudio = 100;
+	newWinHeight, newWinWidth = 0;
+	initialWinBrightness = 100;
+	vsync = false;
+	fullscreenActive = false;
+}
+ 
 
 update_status ConfigurationWindow::Update() {
 	update_status ret = UPDATE_CONTINUE;
@@ -22,6 +30,20 @@ update_status ConfigurationWindow::Update() {
 		}
 		if (ImGui::BeginTabItem("Window"))
 		{
+			newWinHeight = initialWinSize * SCREEN_HEIGHT / 100;
+			newWinWidth = initialWinSize * SCREEN_WIDTH / 100;
+
+			ImGui::SliderInt("Size", &initialWinSize, 50, 100);
+			ImGui::SliderFloat("Brightness", &initialWinBrightness, 50.0f, 100.0f);
+
+			SDL_SetWindowSize(app->window->window, newWinWidth, newWinHeight);
+			SDL_SetWindowOpacity(app->window->window, initialWinBrightness / 100);
+
+			ImGui::Checkbox("Fullscreen", &fullscreenActive);
+			app->window->ToggleFullscreen(fullscreenActive);
+
+			ImGui::Checkbox("Vsync", &vsync);
+			app->renderer3D->ToggleVsync(vsync);
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("File System"))

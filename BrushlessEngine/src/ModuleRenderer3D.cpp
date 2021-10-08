@@ -157,3 +157,11 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
+
+void ModuleRenderer3D::ToggleVsync(bool& vsync)
+{
+	if (vsync)
+		SDL_GL_SetSwapInterval(1);
+	else
+		SDL_GL_SetSwapInterval(0);
+}
