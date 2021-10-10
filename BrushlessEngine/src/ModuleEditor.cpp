@@ -8,6 +8,7 @@
 #include "MainMenuBar.h"
 #include "ConfigurationWindow.h"
 #include "DemoWindow.h"
+#include "ConsoleWindow.h"
 
 #include <iostream>
 
@@ -27,7 +28,6 @@ ModuleEditor::~ModuleEditor()
 
 bool ModuleEditor::Init()
 {
-	LOG("Creating Editor Context");
 	bool ret = true;
 
 	//INITIALIZE IMGUI
@@ -55,7 +55,6 @@ bool ModuleEditor::Init()
 
 bool ModuleEditor::Start()
 {
-	LOG("Setting up the editor");
 	bool ret = true;
 
 	InitializeUI();
@@ -118,8 +117,6 @@ void ModuleEditor::RemoveComponent(UIComponent* component)
 
 bool ModuleEditor::CleanUp()
 {
-	LOG("Cleaning editor");
-
 	components->clear();
 
 	// Shutdown
@@ -136,5 +133,6 @@ void ModuleEditor::InitializeUI()
 	AddComponent(new MainMenuBar(App, "Title bar", nullptr, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new ConfigurationWindow(App, "Configuration", &state.configurationWindowOpen, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new DemoWindow(App, "Demo", &state.demoWindowOpen, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new ConsoleWindow(App, "Console", &state.consoleWindowOpen, ImGuiWindowFlags_NoCollapse));
 }
 

@@ -44,7 +44,7 @@ bool Application::Init()
 	}
 
 	// After all Init calls we call Start() in all modules
-	LOG("Application Start --------------");
+	editor->state.log.LOG("Application Start --------------");
 	item = list_modules.begin();
 
 	while(item != list_modules.end() && ret == true)
@@ -52,6 +52,8 @@ bool Application::Init()
 		ret = (*item)->Start();
 		item++;
 	}
+	
+	editor->state.log.LOG("Starting game '%s'...", TITLE);
 	
 	ms_timer.Start();
 	return ret;

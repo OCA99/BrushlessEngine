@@ -31,9 +31,6 @@
     <ClCompile Include="src\Timer.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\log.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\Primitive.cpp">
       <Filter>render</Filter>
     </ClCompile>
@@ -71,6 +68,9 @@
       <Filter>ui_components</Filter>
     </ClCompile>
     <ClCompile Include="src\DemoWindow.cpp">
+      <Filter>ui_components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConsoleWindow.cpp">
       <Filter>ui_components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -151,6 +151,9 @@
       <Filter>ui_components</Filter>
     </ClInclude>
     <ClInclude Include="src\DemoWindow.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ConsoleWindow.h">
       <Filter>ui_components</Filter>
     </ClInclude>
   </ItemGroup>
