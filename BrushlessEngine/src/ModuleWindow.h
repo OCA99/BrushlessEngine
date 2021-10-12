@@ -20,7 +20,7 @@ public:
 
 	void SetTitle(const char* title);
 
-	void ToggleFullscreen(bool& fullscreen);
+	void SetFullscreen(bool& fullscreen);
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;

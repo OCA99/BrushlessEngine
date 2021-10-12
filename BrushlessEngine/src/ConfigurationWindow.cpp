@@ -1,15 +1,8 @@
 #include "ConfigurationWindow.h"
+#include "ModuleEditor.h"
 
 ConfigurationWindow::ConfigurationWindow(Application* app, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, title, open, flags)
-{
-	initialWinSize = 100;
-	initialWinAudio = 100;
-	newWinHeight, newWinWidth = 0;
-	initialWinBrightness = 100;
-	vsync = false;
-	fullscreenActive = false;
-}
- 
+{}
 
 update_status ConfigurationWindow::Update() {
 	update_status ret = UPDATE_CONTINUE;
@@ -22,29 +15,28 @@ update_status ConfigurationWindow::Update() {
 			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
 			ImGui::Text("Milliseconds per frame: %.3f", 1000.0f / ImGui::GetIO().Framerate);
 
-			bool bar = false;
-
 			ImGui::SliderInt("FPS", &app->targetFPS, 1, 60, NULL, 0);
-			ImGui::Checkbox("Console", &bar);
+			ImGui::Checkbox("Console", &app->editor->state.consoleWindowOpen);
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Window"))
 		{
-			newWinHeight = initialWinSize * SCREEN_HEIGHT / 100;
-			newWinWidth = initialWinSize * SCREEN_WIDTH / 100;
+			ImGui::SliderInt("Window width", &app->editor->state.configuration.windowWidth, 600, 2560);
+			ImGui::SliderInt("Window height", &app->editor->state.configuration.windowHeight, 400, 1440);
+			ImGui::SliderFloat("Brightness", &app->editor->state.configuration.windowBrightness, 0.0f, 1.0f);
 
-			ImGui::SliderInt("Size", &initialWinSize, 50, 100);
-			ImGui::SliderFloat("Brightness", &initialWinBrightness, 50.0f, 100.0f);
+			SDL_SetWindowSize(app->window->window, app->editor->state.configuration.windowWidth, app->editor->state.configuration.windowHeight);
+			SDL_SetWindowBrightness(app->window->window, app->editor->state.configuration.windowBrightness);
 
-			SDL_SetWindowSize(app->window->window, newWinWidth, newWinHeight);//SDL usage
-			SDL_SetWindowOpacity(app->window->window, initialWinBrightness / 100);//SDL usage
+			ImGui::Checkbox("Fullscreen", &app->editor->state.configuration.fullscreen);
+			app->window->SetFullscreen(app->editor->state.configuration.fullscreen);
 
-			ImGui::Checkbox("Fullscreen", &fullscreenActive);
-			app->window->ToggleFullscreen(fullscreenActive);
-
-			ImGui::Checkbox("Vsync", &vsync);
-			app->renderer3D->ToggleVsync(vsync);
 			ImGui::EndTabItem();
+		}
+		if (ImGui::BeginTabItem("Renderer"))
+		{
+			ImGui::Checkbox("Vsync", &app->editor->state.configuration.vsync);
+			app->renderer3D->SetVsync(app->editor->state.configuration.vsync);
 		}
 		if (ImGui::BeginTabItem("File System"))
 		{

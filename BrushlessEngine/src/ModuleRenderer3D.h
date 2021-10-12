@@ -18,7 +18,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	void ToggleVsync(bool& vsync);
+	void SetVsync(bool& vsync);
 
 	// imGui
 	bool showing = true;

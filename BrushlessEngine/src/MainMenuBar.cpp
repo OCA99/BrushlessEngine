@@ -25,11 +25,13 @@ update_status MainMenuBar::Update() {
 	if (ImGui::BeginMenu("Edit"))
 	{
 		ImGui::MenuItem("Settings", nullptr, &app->editor->state.configurationWindowOpen);
+		ImGui::MenuItem("Console", nullptr, &app->editor->state.consoleWindowOpen);
 		ImGui::EndMenu();
 	}
 	if (ImGui::BeginMenu("Help"))
 	{
 		ImGui::MenuItem("Demo", nullptr, &app->editor->state.demoWindowOpen);
+		ImGui::MenuItem("About", nullptr, &app->editor->state.aboutWindowOpen);
 		ImGui::EndMenu();
 	}
 

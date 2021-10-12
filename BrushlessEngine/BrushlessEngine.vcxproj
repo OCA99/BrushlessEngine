@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ConfigurationWindow.cpp" />
+    <ClCompile Include="src\ConsoleWindow.cpp" />
     <ClCompile Include="src\DemoWindow.cpp" />
     <ClCompile Include="src\ExitWindow.cpp" />
     <ClCompile Include="src\Application.cpp" />
@@ -161,7 +162,6 @@
     <ClCompile Include="src\libraries\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\libraries\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\Light.cpp" />
-    <ClCompile Include="src\log.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainMenuBar.cpp" />
     <ClCompile Include="src\ModuleCamera3D.cpp" />
@@ -176,6 +176,7 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\ConfigurationWindow.h" />
+    <ClInclude Include="src\ConsoleWindow.h" />
     <ClInclude Include="src\DemoWindow.h" />
     <ClInclude Include="src\ExitWindow.h" />
     <ClInclude Include="src\glmath.h" />
