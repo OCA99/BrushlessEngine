@@ -36,8 +36,8 @@ update_status ConfigurationWindow::Update() {
 			ImGui::SliderInt("Size", &initialWinSize, 50, 100);
 			ImGui::SliderFloat("Brightness", &initialWinBrightness, 50.0f, 100.0f);
 
-			SDL_SetWindowSize(app->window->window, newWinWidth, newWinHeight);
-			SDL_SetWindowOpacity(app->window->window, initialWinBrightness / 100);
+			SDL_SetWindowSize(app->window->window, newWinWidth, newWinHeight);//SDL usage
+			SDL_SetWindowOpacity(app->window->window, initialWinBrightness / 100);//SDL usage
 
 			ImGui::Checkbox("Fullscreen", &fullscreenActive);
 			app->window->ToggleFullscreen(fullscreenActive);

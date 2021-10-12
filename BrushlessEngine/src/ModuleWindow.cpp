@@ -2,6 +2,9 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 
+#include "libraries/imgui/imgui.h"
+#include "libraries/imgui/imgui_impl_opengl2.h"
+
 ModuleWindow::ModuleWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	window = NULL;
@@ -96,8 +99,8 @@ void ModuleWindow::SetTitle(const char* title)
 void ModuleWindow::ToggleFullscreen(bool& fullscreen)
 {
 	if (fullscreen)
-		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);//SDL usage
 	else
-		SDL_SetWindowFullscreen(window, 0);
+		SDL_SetWindowFullscreen(window, 0);//SDL usage
 
 }

@@ -161,7 +161,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 void ModuleRenderer3D::ToggleVsync(bool& vsync)
 {
 	if (vsync)
-		SDL_GL_SetSwapInterval(1);
+		SDL_GL_SetSwapInterval(1);//SDL usage
 	else
-		SDL_GL_SetSwapInterval(0);
+		SDL_GL_SetSwapInterval(0);//SDL usage
 }

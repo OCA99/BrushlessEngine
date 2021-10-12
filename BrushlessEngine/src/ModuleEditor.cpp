@@ -15,6 +15,7 @@
 #include "libraries/imgui/imgui_internal.h"
 #include "libraries/imgui/imgui_impl_sdl.h"
 #include "libraries/imgui/imgui_impl_opengl2.h"
+#include <gl/GL.h>
 
 #include "libraries/json/json.hpp"
 
@@ -95,6 +96,24 @@ update_status ModuleEditor::Update(float dt)
 
 update_status ModuleEditor::PostUpdate(float dt)
 {
+	// CREATE GRID
+	glLineWidth(3.0f);
+
+	glBegin(GL_LINES);
+	glColor4f(0.8f, 0.8f, 0.8f, 0.8f);
+
+	float d = 40.0f;
+
+	for (float i = -d; i <= d; i += 2.0f)
+	{
+		glVertex3f(i, 0.0f, -d);
+		glVertex3f(i, 0.0f, d);
+		glVertex3f(-d, 0.0f, i);
+		glVertex3f(d, 0.0f, i);
+	}
+	glEnd();
+	// END GRID
+
 	ImGui::EndFrame();
 	ImGui::UpdatePlatformWindows();
 
