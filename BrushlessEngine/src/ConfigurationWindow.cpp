@@ -25,18 +25,14 @@ update_status ConfigurationWindow::Update() {
 			ImGui::SliderInt("Window height", &app->editor->state.configuration.windowHeight, 400, 1440);
 			ImGui::SliderFloat("Brightness", &app->editor->state.configuration.windowBrightness, 0.0f, 1.0f);
 
-			SDL_SetWindowSize(app->window->window, app->editor->state.configuration.windowWidth, app->editor->state.configuration.windowHeight);
-			SDL_SetWindowBrightness(app->window->window, app->editor->state.configuration.windowBrightness);
-
 			ImGui::Checkbox("Fullscreen", &app->editor->state.configuration.fullscreen);
-			app->window->SetFullscreen(app->editor->state.configuration.fullscreen);
 
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Renderer"))
 		{
 			ImGui::Checkbox("Vsync", &app->editor->state.configuration.vsync);
-			app->renderer3D->SetVsync(app->editor->state.configuration.vsync);
+			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("File System"))
 		{

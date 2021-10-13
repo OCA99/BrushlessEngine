@@ -90,6 +90,12 @@ update_status ModuleEditor::Update(float dt)
 		it++;
 	}
 
+	SDL_SetWindowSize(App->window->window, App->editor->state.configuration.windowWidth, App->editor->state.configuration.windowHeight);
+	SDL_SetWindowBrightness(App->window->window, App->editor->state.configuration.windowBrightness);
+	App->window->SetFullscreen(App->editor->state.configuration.fullscreen);
+	App->renderer3D->SetVsync(App->editor->state.configuration.vsync);
+
+
 	return ret;
 }
 
