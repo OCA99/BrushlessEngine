@@ -95,6 +95,23 @@ update_status ModuleEditor::Update(float dt)
 	App->window->SetFullscreen(App->editor->state.configuration.fullscreen);
 	App->renderer3D->SetVsync(App->editor->state.configuration.vsync);
 
+	if (state.configuration.opengl.depth) glEnable(GL_DEPTH_TEST);
+	else glDisable(GL_DEPTH_TEST);
+
+	if (state.configuration.opengl.cull) glEnable(GL_CULL_FACE);
+	else glDisable(GL_CULL_FACE);
+
+	if (state.configuration.opengl.lighting) glEnable(GL_LIGHTING);
+	else glDisable(GL_LIGHTING);
+
+	if (state.configuration.opengl.colorMaterial) glEnable(GL_COLOR_MATERIAL);
+	else glDisable(GL_COLOR_MATERIAL);
+
+	if (state.configuration.opengl.texture2D) glEnable(GL_TEXTURE_2D);
+	else glDisable(GL_TEXTURE_2D);
+
+	if (state.configuration.opengl.wireframe) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	return ret;
 }

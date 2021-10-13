@@ -1,6 +1,8 @@
 #include "ConfigurationWindow.h"
 #include "ModuleEditor.h"
 
+#include <gl/GL.h>
+
 ConfigurationWindow::ConfigurationWindow(Application* app, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, title, open, flags)
 {}
 
@@ -40,6 +42,8 @@ update_status ConfigurationWindow::Update() {
 		}
 		if (ImGui::BeginTabItem("Input"))
 		{
+			ImGui::Text("Mouse X: %0.0f", ImGui::GetIO().MousePos.x);
+			ImGui::Text("Mouse Y: %0.0f", ImGui::GetIO().MousePos.y);
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Hardware"))
@@ -48,6 +52,13 @@ update_status ConfigurationWindow::Update() {
 		}
 		if (ImGui::BeginTabItem("Open GL"))
 		{
+			ImGui::Checkbox("GL_DEPTH_TEST", &app->editor->state.configuration.opengl.depth);
+			ImGui::Checkbox("GL_CULL_FACE", &app->editor->state.configuration.opengl.cull);
+			ImGui::Checkbox("GL_LIGHTING", &app->editor->state.configuration.opengl.lighting);
+			ImGui::Checkbox("GL_COLOR_MATERIAL", &app->editor->state.configuration.opengl.colorMaterial);
+			ImGui::Checkbox("GL_TEXTURE_2D", &app->editor->state.configuration.opengl.texture2D);
+			ImGui::Checkbox("WIREFRAME", &app->editor->state.configuration.opengl.wireframe);
+
 			ImGui::EndTabItem();
 		}
 		ImGui::EndTabBar();

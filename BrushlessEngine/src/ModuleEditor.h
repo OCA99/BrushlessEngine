@@ -24,12 +24,23 @@ struct Log {
 	}
 };
 
+struct OpenGLConfig {
+	bool depth = true;
+	bool cull = true;
+	bool lighting = true;
+	bool colorMaterial = true;
+	bool texture2D = true;
+	bool wireframe = false;
+};
+
 struct Configuration {
 	int windowWidth = 1200;
 	int windowHeight = 800;
 	float windowBrightness = 1.0f;
 	bool vsync = false;
 	bool fullscreen = false;
+
+	OpenGLConfig opengl;
 };
 
 struct EditorState {
