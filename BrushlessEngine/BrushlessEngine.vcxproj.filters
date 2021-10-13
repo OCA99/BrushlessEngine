@@ -73,6 +73,9 @@
     <ClCompile Include="src\ConsoleWindow.cpp">
       <Filter>ui_components</Filter>
     </ClCompile>
+    <ClCompile Include="src\AboutWindow.cpp">
+      <Filter>ui_components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -154,6 +157,9 @@
       <Filter>ui_components</Filter>
     </ClInclude>
     <ClInclude Include="src\ConsoleWindow.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AboutWindow.h">
       <Filter>ui_components</Filter>
     </ClInclude>
   </ItemGroup>

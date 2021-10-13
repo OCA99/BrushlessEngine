@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AboutWindow.cpp" />
     <ClCompile Include="src\ConfigurationWindow.cpp" />
     <ClCompile Include="src\ConsoleWindow.cpp" />
     <ClCompile Include="src\DemoWindow.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AboutWindow.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\ConfigurationWindow.h" />

@@ -9,6 +9,7 @@
 #include "ConfigurationWindow.h"
 #include "DemoWindow.h"
 #include "ConsoleWindow.h"
+#include "AboutWindow.h"
 
 #include <iostream>
 
@@ -216,5 +217,6 @@ void ModuleEditor::InitializeUI()
 	AddComponent(new ConfigurationWindow(App, "Configuration", &state.configurationWindowOpen, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new DemoWindow(App, "Demo", &state.demoWindowOpen, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new ConsoleWindow(App, "Console", &state.consoleWindowOpen, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new AboutWindow(App, "About", &state.aboutWindowOpen, ImGuiWindowFlags_NoCollapse));
 }
 
