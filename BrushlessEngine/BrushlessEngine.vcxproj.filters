@@ -31,9 +31,6 @@
     <ClCompile Include="src\Timer.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\Primitive.cpp">
-      <Filter>render</Filter>
-    </ClCompile>
     <ClCompile Include="src\Light.cpp">
       <Filter>render</Filter>
     </ClCompile>
@@ -110,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="src\Timer.h">
       <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Primitive.h">
-      <Filter>render</Filter>
     </ClInclude>
     <ClInclude Include="src\Light.h">
       <Filter>render</Filter>

@@ -97,8 +97,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)src\libraries\MathGeoLib\libx86\Debug;$(ProjectDir)src\libraries\SDL\lib\x86;$(ProjectDir)src\libraries\Glew\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;MathGeoLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\libraries\Assimp\libx86;$(ProjectDir)src\libraries\MathGeoLib\libx86\Debug;$(ProjectDir)src\libraries\SDL\lib\x86;$(ProjectDir)src\libraries\Glew\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;MathGeoLib.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -170,7 +170,6 @@
     <ClCompile Include="src\ModuleInput.cpp" />
     <ClCompile Include="src\ModuleRenderer3D.cpp" />
     <ClCompile Include="src\ModuleWindow.cpp" />
-    <ClCompile Include="src\Primitive.cpp" />
     <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,7 +198,6 @@
     <ClInclude Include="src\ModuleInput.h" />
     <ClInclude Include="src\ModuleRenderer3D.h" />
     <ClInclude Include="src\ModuleWindow.h" />
-    <ClInclude Include="src\Primitive.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\UIComponent.h" />
   </ItemGroup>
