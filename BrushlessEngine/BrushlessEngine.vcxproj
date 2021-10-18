@@ -148,12 +148,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AboutWindow.cpp" />
+    <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\ConfigurationWindow.cpp" />
     <ClCompile Include="src\ConsoleWindow.cpp" />
     <ClCompile Include="src\DemoWindow.cpp" />
     <ClCompile Include="src\ExitWindow.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Color.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\glmath.cpp" />
     <ClCompile Include="src\libraries\imgui\imgui.cpp" />
     <ClCompile Include="src\libraries\imgui\imgui_demo.cpp" />
@@ -171,15 +173,19 @@
     <ClCompile Include="src\ModuleRenderer3D.cpp" />
     <ClCompile Include="src\ModuleWindow.cpp" />
     <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AboutWindow.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Color.h" />
+    <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ConfigurationWindow.h" />
     <ClInclude Include="src\ConsoleWindow.h" />
     <ClInclude Include="src\DemoWindow.h" />
     <ClInclude Include="src\ExitWindow.h" />
+    <ClInclude Include="src\float3.h" />
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\glmath.h" />
     <ClInclude Include="src\Globals.h" />
     <ClInclude Include="src\libraries\imgui\imconfig.h" />
@@ -199,6 +205,7 @@
     <ClInclude Include="src\ModuleRenderer3D.h" />
     <ClInclude Include="src\ModuleWindow.h" />
     <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\UIComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

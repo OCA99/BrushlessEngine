@@ -73,6 +73,15 @@
     <ClCompile Include="src\AboutWindow.cpp">
       <Filter>ui_components</Filter>
     </ClCompile>
+    <ClCompile Include="src\Transform.cpp">
+      <Filter>game_object\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Component.cpp">
+      <Filter>game_object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>game_object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -156,6 +165,18 @@
     <ClInclude Include="src\AboutWindow.h">
       <Filter>ui_components</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>game_object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Component.h">
+      <Filter>game_object</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Transform.h">
+      <Filter>game_object\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\float3.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
@@ -181,6 +202,15 @@
     </Filter>
     <Filter Include="ui_components">
       <UniqueIdentifier>{d235b4ca-976f-4f2c-8991-e34f218c3143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_object">
+      <UniqueIdentifier>{837cd616-37aa-4381-bc01-6d0c498db33b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_object\components">
+      <UniqueIdentifier>{a1e4c3fa-8aae-444b-8ce0-db6aaf7a9133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="geometry">
+      <UniqueIdentifier>{2457342f-eed8-470b-9674-4c61a08afcaa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
