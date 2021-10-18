@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component.h"
-#include "float3.h"
+#include "libraries/MathGeoLib/include/Math/float3.h"
 
 class Transform : public Component {
 public:

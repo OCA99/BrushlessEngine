@@ -174,9 +174,6 @@
     <ClInclude Include="src\Transform.h">
       <Filter>game_object\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\float3.h">
-      <Filter>geometry</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
@@ -208,9 +205,6 @@
     </Filter>
     <Filter Include="game_object\components">
       <UniqueIdentifier>{a1e4c3fa-8aae-444b-8ce0-db6aaf7a9133}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="geometry">
-      <UniqueIdentifier>{2457342f-eed8-470b-9674-4c61a08afcaa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

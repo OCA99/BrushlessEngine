@@ -184,7 +184,6 @@
     <ClInclude Include="src\ConsoleWindow.h" />
     <ClInclude Include="src\DemoWindow.h" />
     <ClInclude Include="src\ExitWindow.h" />
-    <ClInclude Include="src\float3.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\glmath.h" />
     <ClInclude Include="src\Globals.h" />
