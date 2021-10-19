@@ -1,8 +1,5 @@
 #include "Globals.h"
 #include "Mesh.h"
-#include "libraries/Glew/include/glew.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
 
 // ------------------------------------------------------------
 Mesh::Mesh() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(MeshTypes::Custom_Mesh), vertexBuf(-1), vertexNum(-1), vertices(nullptr), indexBuf(-1), indexNum(-1), indices(nullptr),
