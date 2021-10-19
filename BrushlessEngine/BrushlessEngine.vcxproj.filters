@@ -82,6 +82,12 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>game_object</Filter>
     </ClCompile>
+    <ClCompile Include="src\BrushlessMesh.cpp">
+      <Filter>game_object\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleImport.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -174,6 +180,135 @@
     <ClInclude Include="src\Transform.h">
       <Filter>game_object\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\BrushlessMesh.h">
+      <Filter>game_object\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleImport.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Glew\include\eglew.h">
+      <Filter>libraries\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Glew\include\glew.h">
+      <Filter>libraries\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Glew\include\glxew.h">
+      <Filter>libraries\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Glew\include\wglew.h">
+      <Filter>libraries\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\ai_assert.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\port\AndroidJNI\AndroidJNIIOSystem.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\anim.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\camera.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\cexport.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\cfileio.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\cimport.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\color4.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\config.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\DefaultLogger.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\defs.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\Exporter.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\Importer.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\importerdesc.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\IOStream.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\IOSystem.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\light.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\Logger.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\LogStream.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\material.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\matrix3x3.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\matrix4x4.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\mesh.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\metadata.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\NullLogger.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\Compiler\poppack1.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\postprocess.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\ProgressHandler.hpp">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\Compiler\pstdint.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\Compiler\pushpack1.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\quaternion.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\scene.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\texture.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\types.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\vector2.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\vector3.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Assimp\include\version.h">
+      <Filter>libraries\assimp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
@@ -206,5 +341,34 @@
     <Filter Include="game_object\components">
       <UniqueIdentifier>{a1e4c3fa-8aae-444b-8ce0-db6aaf7a9133}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libraries\glew">
+      <UniqueIdentifier>{42692832-a3eb-43ba-8948-fab91524a02e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\assimp">
+      <UniqueIdentifier>{022a61e3-2699-493a-a8d6-9eae524000bf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\libraries\Assimp\include\color4.inl">
+      <Filter>libraries\assimp</Filter>
+    </None>
+    <None Include="src\libraries\Assimp\include\material.inl">
+      <Filter>libraries\assimp</Filter>
+    </None>
+    <None Include="src\libraries\Assimp\include\matrix3x3.inl">
+      <Filter>libraries\assimp</Filter>
+    </None>
+    <None Include="src\libraries\Assimp\include\matrix4x4.inl">
+      <Filter>libraries\assimp</Filter>
+    </None>
+    <None Include="src\libraries\Assimp\include\quaternion.inl">
+      <Filter>libraries\assimp</Filter>
+    </None>
+    <None Include="src\libraries\Assimp\include\vector2.inl">
+      <Filter>libraries\assimp</Filter>
+    </None>
+    <None Include="src\libraries\Assimp\include\vector3.inl">
+      <Filter>libraries\assimp</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\libraries;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\libraries\Glew\include;$(ProjectDir)src\libraries\Assimp\include;$(ProjectDir)src\libraries\MathGeoLib\include;$(ProjectDir)src\libraries\glmath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AboutWindow.cpp" />
+    <ClCompile Include="src\BrushlessMesh.cpp" />
     <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\ConfigurationWindow.cpp" />
     <ClCompile Include="src\ConsoleWindow.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="src\MainMenuBar.cpp" />
     <ClCompile Include="src\ModuleCamera3D.cpp" />
     <ClCompile Include="src\ModuleEditor.cpp" />
+    <ClCompile Include="src\ModuleImport.cpp" />
     <ClCompile Include="src\ModuleInput.cpp" />
     <ClCompile Include="src\ModuleRenderer3D.cpp" />
     <ClCompile Include="src\ModuleWindow.cpp" />
@@ -178,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="src\AboutWindow.h" />
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\BrushlessMesh.h" />
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ConfigurationWindow.h" />
@@ -187,6 +190,47 @@
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\glmath.h" />
     <ClInclude Include="src\Globals.h" />
+    <ClInclude Include="src\libraries\Assimp\include\ai_assert.h" />
+    <ClInclude Include="src\libraries\Assimp\include\anim.h" />
+    <ClInclude Include="src\libraries\Assimp\include\camera.h" />
+    <ClInclude Include="src\libraries\Assimp\include\cexport.h" />
+    <ClInclude Include="src\libraries\Assimp\include\cfileio.h" />
+    <ClInclude Include="src\libraries\Assimp\include\cimport.h" />
+    <ClInclude Include="src\libraries\Assimp\include\color4.h" />
+    <ClInclude Include="src\libraries\Assimp\include\Compiler\poppack1.h" />
+    <ClInclude Include="src\libraries\Assimp\include\Compiler\pstdint.h" />
+    <ClInclude Include="src\libraries\Assimp\include\Compiler\pushpack1.h" />
+    <ClInclude Include="src\libraries\Assimp\include\config.h" />
+    <ClInclude Include="src\libraries\Assimp\include\DefaultLogger.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\defs.h" />
+    <ClInclude Include="src\libraries\Assimp\include\Exporter.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\Importer.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\importerdesc.h" />
+    <ClInclude Include="src\libraries\Assimp\include\IOStream.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\IOSystem.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\light.h" />
+    <ClInclude Include="src\libraries\Assimp\include\Logger.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\LogStream.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\material.h" />
+    <ClInclude Include="src\libraries\Assimp\include\matrix3x3.h" />
+    <ClInclude Include="src\libraries\Assimp\include\matrix4x4.h" />
+    <ClInclude Include="src\libraries\Assimp\include\mesh.h" />
+    <ClInclude Include="src\libraries\Assimp\include\metadata.h" />
+    <ClInclude Include="src\libraries\Assimp\include\NullLogger.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="src\libraries\Assimp\include\postprocess.h" />
+    <ClInclude Include="src\libraries\Assimp\include\ProgressHandler.hpp" />
+    <ClInclude Include="src\libraries\Assimp\include\quaternion.h" />
+    <ClInclude Include="src\libraries\Assimp\include\scene.h" />
+    <ClInclude Include="src\libraries\Assimp\include\texture.h" />
+    <ClInclude Include="src\libraries\Assimp\include\types.h" />
+    <ClInclude Include="src\libraries\Assimp\include\vector2.h" />
+    <ClInclude Include="src\libraries\Assimp\include\vector3.h" />
+    <ClInclude Include="src\libraries\Assimp\include\version.h" />
+    <ClInclude Include="src\libraries\Glew\include\eglew.h" />
+    <ClInclude Include="src\libraries\Glew\include\glew.h" />
+    <ClInclude Include="src\libraries\Glew\include\glxew.h" />
+    <ClInclude Include="src\libraries\Glew\include\wglew.h" />
     <ClInclude Include="src\libraries\imgui\imconfig.h" />
     <ClInclude Include="src\libraries\imgui\imgui.h" />
     <ClInclude Include="src\libraries\imgui\imgui_impl_opengl2.h" />
@@ -200,12 +244,22 @@
     <ClInclude Include="src\Module.h" />
     <ClInclude Include="src\ModuleCamera3D.h" />
     <ClInclude Include="src\ModuleEditor.h" />
+    <ClInclude Include="src\ModuleImport.h" />
     <ClInclude Include="src\ModuleInput.h" />
     <ClInclude Include="src\ModuleRenderer3D.h" />
     <ClInclude Include="src\ModuleWindow.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\UIComponent.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\libraries\Assimp\include\color4.inl" />
+    <None Include="src\libraries\Assimp\include\material.inl" />
+    <None Include="src\libraries\Assimp\include\matrix3x3.inl" />
+    <None Include="src\libraries\Assimp\include\matrix4x4.inl" />
+    <None Include="src\libraries\Assimp\include\quaternion.inl" />
+    <None Include="src\libraries\Assimp\include\vector2.inl" />
+    <None Include="src\libraries\Assimp\include\vector3.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
