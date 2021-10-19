@@ -82,6 +82,12 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>game_object</Filter>
     </ClCompile>
+    <ClCompile Include="src\ModuleImport.cpp">
+      <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>game_object\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -174,6 +180,13 @@
     <ClInclude Include="src\Transform.h">
       <Filter>game_object\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\ModuleImport.h">
+      <Filter>modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>game_object\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\Glew\include\glew.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
