@@ -6,6 +6,7 @@
 #include "scene.h"
 #include "postprocess.h"
 
+#include "glew.h"
 
 ModuleImport::ModuleImport(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -23,7 +24,7 @@ bool ModuleImport::Init()
 
 bool ModuleImport::Start()
 {
-	//ImportScene("Assets/warrior.fbx");
+	glewInit();
 	ImportScene("Assets/BakerHouse.fbx");
 	return true;
 }
