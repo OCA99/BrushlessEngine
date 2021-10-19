@@ -78,14 +78,14 @@ inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
     const aiMaterialProperty* prop;
     const aiReturn ret = ::aiGetMaterialProperty(this,pKey,type,idx,
         (const aiMaterialProperty**)&prop);
-    if ( aiReturn::aiReturn_SUCCESS == ret )    {
+    if ( AI_SUCCESS == ret )    {
 
         if (prop->mDataLength < sizeof(Type)*iNum) {
-            return aiReturn::aiReturn_FAILURE;
+            return AI_FAILURE;
         }
 
-        if (prop->mType != aiPropertyTypeInfo::aiPTI_Buffer) {
-            return aiReturn::aiReturn_FAILURE;
+        if (prop->mType != aiPTI_Buffer) {
+            return AI_FAILURE;
         }
 
         iNum = (std::min)((size_t)iNum,prop->mDataLength / sizeof(Type));
@@ -105,14 +105,14 @@ inline aiReturn aiMaterial::Get(const char* pKey,unsigned int type,
     const aiMaterialProperty* prop;
     const aiReturn ret = ::aiGetMaterialProperty(this,pKey,type,idx,
         (const aiMaterialProperty**)&prop);
-    if (aiReturn::aiReturn_SUCCESS == ret )    {
+    if ( AI_SUCCESS == ret )    {
 
         if (prop->mDataLength < sizeof(Type)) {
-            return aiReturn::aiReturn_FAILURE;
+            return AI_FAILURE;
         }
 
-        if (prop->mType != aiPropertyTypeInfo::aiPTI_Buffer) {
-            return aiReturn::aiReturn_FAILURE;
+        if (prop->mType != aiPTI_Buffer) {
+            return AI_FAILURE;
         }
 
         ::memcpy(&pOut,prop->mData,sizeof(Type));
@@ -185,7 +185,7 @@ aiReturn aiMaterial::AddProperty (const TYPE* pInput,
 {
     return AddBinaryProperty((const void*)pInput,
         pNumValues * sizeof(TYPE),
-        pKey,type,index, aiPropertyTypeInfo::aiPTI_Buffer);
+        pKey,type,index,aiPTI_Buffer);
 }
 
 // ---------------------------------------------------------------------------
