@@ -3,11 +3,6 @@
 #include "Component.h"
 #include <vector>
 
-#include "libraries/Glew/include/glew.h"
-#include "SDL_opengl.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
-
 enum MeshTypes
 {
 	Primitive_Grid,

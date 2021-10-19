@@ -186,6 +186,7 @@
     <ClInclude Include="src\Mesh.h">
       <Filter>game_object\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\libraries\Glew\include\glew.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
