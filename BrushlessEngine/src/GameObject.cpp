@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "MeshFilter.h"
 #include "MeshRenderer.h"
+#include "Texture.h"
 
 GameObject::GameObject(std::string name, bool active = true) {
 	this->name = name;
@@ -11,6 +12,8 @@ GameObject::GameObject(std::string name, bool active = true) {
 	this->transform = new Transform(this);
 	this->meshFilter = new MeshFilter(this);
 	this->meshRenderer = new MeshRenderer(this);
+	this->texture = new Texture(this);
+	this->texture->SetCheckerboxTexture();
 }
 
 GameObject::~GameObject()
@@ -18,4 +21,5 @@ GameObject::~GameObject()
 	delete transform;
 	delete meshFilter;
 	delete meshRenderer;
+	delete texture;
 }

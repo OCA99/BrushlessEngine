@@ -177,6 +177,7 @@
     <ClCompile Include="src\ModuleRenderer3D.cpp" />
     <ClCompile Include="src\ModuleWindow.cpp" />
     <ClCompile Include="src\BrushlessScene.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
@@ -254,6 +255,7 @@
     <ClInclude Include="src\ModuleRenderer3D.h" />
     <ClInclude Include="src\ModuleWindow.h" />
     <ClInclude Include="src\BrushlessScene.h" />
+    <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\UIComponent.h" />

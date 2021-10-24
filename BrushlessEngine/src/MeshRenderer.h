@@ -13,6 +13,7 @@ private:
 
 	void DrawVertices();
 	void DrawNormals();
+	void DrawTexture();
 	void BindIndices();
 	void DrawElements();
 };

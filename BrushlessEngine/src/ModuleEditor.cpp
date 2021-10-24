@@ -148,46 +148,6 @@ update_status ModuleEditor::PostUpdate(float dt)
 	glEnd();
 	// END GRID
 
-	/*GLfloat vertices[] = {1, 1, 1,  -1, 1, 1,  -1,-1, 1,   1,-1, 1,   // v0,v1,v2,v3 (front)
-						 1,-1,-1,   1, 1,-1,   // v4,v5 (right)
-						 -1, 1,-1,   // v6 (top)
-					   -1,-1,-1,   // v7 (left)
-	};
-
-	GLfloat normals[] = { 0, 0, 1,   0, 0, 1,   0, 0, 1,   0, 0, 1,   // v0,v1,v2,v3 (front)
-						 1, 0, 0,   1, 0, 0,   // v4,v5 (right)
-						   0, 1, 0,     // v6 (top)
-						 -1, 0, 0,    // v7 (left)
-	};
-
-// color array
-	GLfloat colors[] = { 1, 1, 1,   1, 1, 0,   1, 0, 0,   1, 0, 1,   // v0,v1,v2,v3 (front)
-							 0, 0, 1,   0, 1, 1,   // v4,v5 (right)
-							 0, 1, 0,    // v6 (top)
-							 0, 0, 0,   // v1,v6,v7,v2 (left)
-	};
-
-	GLubyte indices[] = { 0,1,2, 2,3,0,   // 36 of indices
-						 0,3,4, 4,5,0,
-						 0,5,6, 6,1,0,
-						 1,6,7, 7,2,1,
-						 7,4,3, 3,2,7,
-						 4,7,6, 6,5,4 };
-
-	// activate and specify pointer to vertex array
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glNormalPointer(GL_FLOAT, 0, normals);
-	glColorPointer(3, GL_FLOAT, 0, colors);
-	glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-	// draw a cube
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, indices);
-
-	// deactivate vertex arrays after drawing
-	glDisableClientState(GL_VERTEX_ARRAY);*/
-
 	ImGui::EndFrame();
 	ImGui::UpdatePlatformWindows();
 

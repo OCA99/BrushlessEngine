@@ -81,8 +81,6 @@ BrushlessMesh* ModuleImport::ImportMesh(aiMesh* aiMesh)
 
 		mesh->normals = new float[aiMesh->mNumVertices * 3]();
 
-		int t = 0;
-
 		for (uint i = 0; i < aiMesh->mNumVertices; i += 3)
 		{
 			if (aiMesh->HasNormals())
@@ -90,6 +88,19 @@ BrushlessMesh* ModuleImport::ImportMesh(aiMesh* aiMesh)
 				mesh->normals[i] = aiMesh->mNormals[i].x;
 				mesh->normals[i + 1] = aiMesh->mNormals[i].y;
 				mesh->normals[i + 2] = aiMesh->mNormals[i].z;
+			}
+
+
+		}
+
+		mesh->textureCoordinates = new float[mesh->vertexCount * 2]();
+
+		if (aiMesh->mTextureCoords[0])
+		{
+			for (uint i = 0; i < aiMesh->mNumVertices; i++)
+			{
+				mesh->textureCoordinates[i * 2] = aiMesh->mTextureCoords[0][i].x;
+				mesh->textureCoordinates[i * 2 + 1] = aiMesh->mTextureCoords[0][i].y;
 			}
 		}
 

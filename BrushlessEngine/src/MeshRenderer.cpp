@@ -6,6 +6,7 @@
 
 #include "GameObject.h"
 #include "MeshFilter.h"
+#include "Texture.h"
 
 MeshRenderer::MeshRenderer(GameObject* gameObject) : Component(gameObject) {
 }
@@ -15,6 +16,7 @@ void MeshRenderer::Render()
 	InitRender();
 	DrawVertices();
 	DrawNormals();
+	DrawTexture();
 	BindIndices();
 	DrawElements();
 	EndRender();
@@ -50,6 +52,13 @@ void MeshRenderer::DrawNormals()
 {
 	glBindBuffer(GL_NORMAL_ARRAY, gameObject->meshFilter->mesh->normalsBuffer);
 	glNormalPointer(GL_FLOAT, 0, NULL);
+}
+
+void MeshRenderer::DrawTexture()
+{
+	glBindBuffer(GL_ARRAY_BUFFER, gameObject->meshFilter->mesh->textureBuffer);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	glBindTexture(GL_TEXTURE_2D, gameObject->texture->textureId);
 }
 
 void MeshRenderer::BindIndices()

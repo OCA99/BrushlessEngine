@@ -97,6 +97,9 @@
     <ClCompile Include="src\BrushlessScene.cpp">
       <Filter>game_object\utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>game_object\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -326,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="src\BrushlessScene.h">
       <Filter>game_object\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>game_object\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
