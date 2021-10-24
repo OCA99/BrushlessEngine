@@ -25,7 +25,6 @@ bool ModuleImport::Init()
 bool ModuleImport::Start()
 {
 	glewInit();
-	ImportScene("Assets/BakerHouse.fbx");
 	return true;
 }
 
@@ -36,89 +35,68 @@ bool ModuleImport::CleanUp()
 	return true;
 }
 
-uint ModuleImport::ImportScene(const char* path)
+std::vector<BrushlessMesh*> ModuleImport::ImportScene(const char* path)
 {
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
+	std::vector<BrushlessMesh*> meshList;
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (uint i = 0; i < scene->mNumMeshes; i++)
 		{
-			ImportModel(scene->mMeshes[i]);
+			BrushlessMesh* mesh = ImportMesh(scene->mMeshes[i]);
+			if (mesh != nullptr) meshList.push_back(mesh);
 		}
 		aiReleaseImport(scene);
 	}
 	else
 	{
-		//error
+		App->editor->state.log.LOG("%s failed to load", path);
 	}
 
-	return scene->mNumMeshes;
+	return meshList;
 }
 
-Mesh* ModuleImport::ImportModel(aiMesh* mesh)
+BrushlessMesh* ModuleImport::ImportMesh(aiMesh* aiMesh)
 {
-	Mesh* m = new Mesh();
-	m->vertexNum = mesh->mNumVertices;
-	m->vertices = new float[m->vertexNum * 3];
-	memcpy(m->vertices, mesh->mVertices, sizeof(float) * m->vertexNum * 3);
+	BrushlessMesh* mesh = new BrushlessMesh();
+	mesh->vertexCount = aiMesh->mNumVertices;
+	mesh->vertices = new float[mesh->vertexCount * 3];
+	memcpy(mesh->vertices, aiMesh->mVertices, sizeof(float) * mesh->vertexCount * 3);
 
-	//debug with vertices loaded
-
-	if (mesh->HasFaces())
+	if (aiMesh->HasFaces())
 	{
-		m->indexNum = mesh->mNumFaces * 3;
-		m->indices = new uint[m->indexNum];
-		for (uint j = 0; j < mesh->mNumFaces; j++)
+		mesh->indexCount = aiMesh->mNumFaces * 3;
+		mesh->indices = new uint[mesh->indexCount];
+		for (uint j = 0; j < aiMesh->mNumFaces; j++)
 		{
-			if (mesh->mFaces[j].mNumIndices != 3)
+			if (aiMesh->mFaces[j].mNumIndices != 3)
 			{
-				// Quad
-				//warning for geometry != 3 vertices
+				// https://github.com/mapbox/earcut.hpp
 			}
 			else
 			{
-				memcpy(&m->indices[j * 3], mesh->mFaces[j].mIndices, sizeof(uint) * 3);
+				memcpy(&mesh->indices[j * 3], aiMesh->mFaces[j].mIndices, sizeof(uint) * 3);
 			}
 		}
 
-		m->colors = new float[m->indexNum * 4]();	//RGBA
-		m->normals = new float[mesh->mNumVertices * 3]();
+		mesh->normals = new float[aiMesh->mNumVertices * 3]();
 
 		int t = 0;
 
-		for (uint v = 0, n = 0, tx = 0, c = 0; v < mesh->mNumVertices; v++, n += 3, c += 4, tx += 2)
+		for (uint i = 0; i < aiMesh->mNumVertices; i += 3)
 		{
-			if (mesh->HasNormals())
+			if (aiMesh->HasNormals())
 			{
-				m->normals[n] = mesh->mNormals[v].x;
-				m->normals[n + 1] = mesh->mNormals[v].y;
-				m->normals[n + 2] = mesh->mNormals[v].z;
+				mesh->normals[i] = aiMesh->mNormals[i].x;
+				mesh->normals[i + 1] = aiMesh->mNormals[i].y;
+				mesh->normals[i + 2] = aiMesh->mNormals[i].z;
 			}
-
-			if (mesh->HasVertexColors(v))
-			{
-				m->colors[c] = mesh->mColors[v]->r;
-				m->colors[c + 1] = mesh->mColors[v]->g;
-				m->colors[c + 2] = mesh->mColors[v]->b;
-				m->colors[c + 3] = mesh->mColors[v]->a;
-			}
-			else
-			{
-				m->colors[c] = 0.0f;
-				m->colors[c + 1] = 0.0f;
-				m->colors[c + 2] = 0.0f;
-				m->colors[c + 3] = 0.0f;
-			}
-
-			t = tx;
 		}
 
-		m->GenerateBuffers();
-
-		listMesh.push_back(m);
-		return m;
+		return mesh;
 	}
+
+	delete mesh;
 
 	return nullptr;
 }

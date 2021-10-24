@@ -168,12 +168,15 @@
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainMenuBar.cpp" />
+    <ClCompile Include="src\MeshFilter.cpp" />
+    <ClCompile Include="src\MeshRenderer.cpp" />
     <ClCompile Include="src\ModuleCamera3D.cpp" />
     <ClCompile Include="src\ModuleEditor.cpp" />
     <ClCompile Include="src\ModuleImport.cpp" />
     <ClCompile Include="src\ModuleInput.cpp" />
     <ClCompile Include="src\ModuleRenderer3D.cpp" />
     <ClCompile Include="src\ModuleWindow.cpp" />
+    <ClCompile Include="src\BrushlessScene.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
@@ -241,6 +244,8 @@
     <ClInclude Include="src\libraries\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Light.h" />
     <ClInclude Include="src\MainMenuBar.h" />
+    <ClInclude Include="src\MeshFilter.h" />
+    <ClInclude Include="src\MeshRenderer.h" />
     <ClInclude Include="src\Module.h" />
     <ClInclude Include="src\ModuleCamera3D.h" />
     <ClInclude Include="src\ModuleEditor.h" />
@@ -248,6 +253,7 @@
     <ClInclude Include="src\ModuleInput.h" />
     <ClInclude Include="src\ModuleRenderer3D.h" />
     <ClInclude Include="src\ModuleWindow.h" />
+    <ClInclude Include="src\BrushlessScene.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\UIComponent.h" />

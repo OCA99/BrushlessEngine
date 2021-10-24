@@ -18,8 +18,8 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(editor);
 	AddModule(import);
+	AddModule(editor);
 
 	// Renderer last!
 	AddModule(renderer3D);

@@ -6,6 +6,10 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+#include "BrushlessScene.h"
+#include "GameObject.h"
+#include "MeshRenderer.h"
+
 #include "libraries/imgui/imgui.h"
 #include "libraries/imgui/imgui_impl_sdl.h"
 #include "libraries/imgui/imgui_impl_opengl2.h"
@@ -123,6 +127,19 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
+update_status ModuleRenderer3D::Update(float dt)
+{
+	BrushlessScene* scene = App->editor->currentScene;
+
+	if (scene != nullptr) {
+		for (int i = 0; i < scene->objects.size(); i++) {
+			scene->objects[i]->meshRenderer->Render();
+		}
+	}
+
+	return UPDATE_CONTINUE;
+}
+
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
@@ -155,7 +172,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 void ModuleRenderer3D::SetVsync(bool& vsync)
 {
 	if (vsync)
-		SDL_GL_SetSwapInterval(1);//SDL usage
+		SDL_GL_SetSwapInterval(1);
 	else
-		SDL_GL_SetSwapInterval(0);//SDL usage
+		SDL_GL_SetSwapInterval(0);
 }

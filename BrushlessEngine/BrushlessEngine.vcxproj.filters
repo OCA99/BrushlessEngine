@@ -82,11 +82,20 @@
     <ClCompile Include="src\GameObject.cpp">
       <Filter>game_object</Filter>
     </ClCompile>
-    <ClCompile Include="src\BrushlessMesh.cpp">
-      <Filter>game_object\components</Filter>
-    </ClCompile>
     <ClCompile Include="src\ModuleImport.cpp">
       <Filter>modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BrushlessMesh.cpp">
+      <Filter>game_object\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshFilter.cpp">
+      <Filter>game_object\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MeshRenderer.cpp">
+      <Filter>game_object\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BrushlessScene.cpp">
+      <Filter>game_object\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,9 +187,6 @@
       <Filter>game_object</Filter>
     </ClInclude>
     <ClInclude Include="src\Transform.h">
-      <Filter>game_object\components</Filter>
-    </ClInclude>
-    <ClInclude Include="src\BrushlessMesh.h">
       <Filter>game_object\components</Filter>
     </ClInclude>
     <ClInclude Include="src\ModuleImport.h">
@@ -309,6 +315,18 @@
     <ClInclude Include="src\libraries\Assimp\include\version.h">
       <Filter>libraries\assimp</Filter>
     </ClInclude>
+    <ClInclude Include="src\BrushlessMesh.h">
+      <Filter>game_object\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshFilter.h">
+      <Filter>game_object\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MeshRenderer.h">
+      <Filter>game_object\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BrushlessScene.h">
+      <Filter>game_object\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
@@ -346,6 +364,9 @@
     </Filter>
     <Filter Include="libraries\assimp">
       <UniqueIdentifier>{022a61e3-2699-493a-a8d6-9eae524000bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="game_object\utils">
+      <UniqueIdentifier>{8c30ee9c-c054-4639-a78d-a3f5de388bff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #include "ModuleEditor.h"
 #include "ModuleWindow.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleImport.h"
 
 #include "ExitWindow.h"
 #include "MainMenuBar.h"
@@ -10,6 +11,10 @@
 #include "DemoWindow.h"
 #include "ConsoleWindow.h"
 #include "AboutWindow.h"
+
+#include "GameObject.h"
+#include "BrushlessScene.h"
+#include "MeshFilter.h"
 
 #include <iostream>
 
@@ -26,7 +31,12 @@ ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, s
 }
 
 ModuleEditor::~ModuleEditor()
-{}
+{
+	for (int i = 0; i < components.size(); i++) {
+		delete components[i];
+	}
+	delete currentScene;
+}
 
 bool ModuleEditor::Init()
 {
@@ -60,6 +70,7 @@ bool ModuleEditor::Start()
 	bool ret = true;
 
 	InitializeUI();
+	LoadScene("Assets/BakerHouse.fbx");
 
 	return ret;
 }
@@ -81,8 +92,8 @@ update_status ModuleEditor::Update(float dt)
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	std::vector<UIComponent*>::iterator it = components->begin();
-	while (it != components->end()) {
+	std::vector<UIComponent*>::iterator it = components.begin();
+	while (it != components.end()) {
 		if ((*it)->open == nullptr || *(*it)->open) {
 			if ((*it)->PreUpdate() == UPDATE_STOP) return UPDATE_STOP;
 			if ((*it)->Update() == UPDATE_STOP) return UPDATE_STOP;
@@ -137,7 +148,7 @@ update_status ModuleEditor::PostUpdate(float dt)
 	glEnd();
 	// END GRID
 
-	GLfloat vertices[] = { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,   1,-1, 1,   // v0,v1,v2,v3 (front)
+	/*GLfloat vertices[] = {1, 1, 1,  -1, 1, 1,  -1,-1, 1,   1,-1, 1,   // v0,v1,v2,v3 (front)
 						 1,-1,-1,   1, 1,-1,   // v4,v5 (right)
 						 -1, 1,-1,   // v6 (top)
 					   -1,-1,-1,   // v7 (left)
@@ -175,7 +186,7 @@ update_status ModuleEditor::PostUpdate(float dt)
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, indices);
 
 	// deactivate vertex arrays after drawing
-	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);*/
 
 	ImGui::EndFrame();
 	ImGui::UpdatePlatformWindows();
@@ -190,19 +201,33 @@ update_status ModuleEditor::PostUpdate(float dt)
 
 void ModuleEditor::AddComponent(UIComponent* component)
 {
-	components->push_back(component);
+	components.push_back(component);
 }
 
 void ModuleEditor::RemoveComponent(UIComponent* component)
 {
-	components->erase(std::remove(components->begin(), components->end(), component), components->end());
+	components.erase(std::remove(components.begin(), components.end(), component), components.end());
+}
+
+void ModuleEditor::LoadScene(const char* path)
+{
+	BrushlessScene* s = new BrushlessScene();
+
+	std::vector<BrushlessMesh*> meshes = App->import->ImportScene(path);
+	for (int i = 0; i < meshes.size(); i++) {
+		GameObject* object = new GameObject("New GameObject", true);
+		object->meshFilter->mesh = meshes[i];
+		object->meshFilter->mesh->InitializeBuffers();
+		s->objects.push_back(object);
+	}
+
+	currentScene = s;
 }
 
 bool ModuleEditor::CleanUp()
 {
-	components->clear();
+	components.clear();
 
-	// Shutdown
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();

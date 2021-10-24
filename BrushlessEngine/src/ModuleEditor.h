@@ -9,6 +9,7 @@
 #include "glmath.h"
 
 class UIComponent;
+class BrushlessScene;
 
 struct Log {
 	std::vector<std::string>* consoleLogs = new std::vector<std::string>();
@@ -71,10 +72,14 @@ public:
 	void AddComponent(UIComponent* component);
 	void RemoveComponent(UIComponent* component);
 
+	void LoadScene(const char* path);
+
 	bool CleanUp();
 
-	std::vector<UIComponent*>* components = new std::vector<UIComponent*>();
+	std::vector<UIComponent*> components;
 	EditorState state;
+
+	BrushlessScene* currentScene = nullptr;
 
 private:
 	void InitializeUI();
