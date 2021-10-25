@@ -175,7 +175,7 @@ void ModuleEditor::LoadScene(const char* path)
 
 	std::vector<BrushlessMesh*> meshes = App->import->ImportScene(path);
 	for (int i = 0; i < meshes.size(); i++) {
-		GameObject* object = new GameObject("New GameObject", true);
+		GameObject* object = new GameObject(App, "New GameObject", true);
 		object->meshFilter->mesh = meshes[i];
 		object->meshFilter->mesh->InitializeBuffers();
 		s->objects.push_back(object);

@@ -2,6 +2,7 @@
 
 #include <string>
 
+class Application;
 class Transform;
 class MeshFilter;
 class MeshRenderer;
@@ -9,7 +10,7 @@ class Texture;
 
 class GameObject {
 public:
-	GameObject(std::string name, bool active);
+	GameObject(Application* app, std::string name, bool active);
 	~GameObject();
 
 	Transform* transform;

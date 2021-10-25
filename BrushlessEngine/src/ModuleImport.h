@@ -3,6 +3,8 @@
 #include "Module.h"
 #include "BrushlessMesh.h"
 
+#pragma warning(disable:4996)
+
 class Application;
 struct aiMesh;
 
@@ -18,4 +20,7 @@ public:
 
 	std::vector<BrushlessMesh*> ImportScene(const char* path);
 	BrushlessMesh* ImportMesh(aiMesh* mesh);
+	unsigned int ImportTexture(unsigned int id, const char* path);
+
+	wchar_t* GetWC(const char* c);
 };

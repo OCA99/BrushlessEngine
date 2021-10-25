@@ -3,6 +3,8 @@
 
 #include <ilut.h>  // Probably only have to #include this one
 
+#include <comdef.h>
+
 class ilImage
 {
 public:
@@ -808,13 +810,15 @@ HPALETTE ilWin32::GetPal(ilImage &Image)
 ILboolean ilWin32::GetResource(ilImage &Image, HINSTANCE hInst, ILint ID, char *ResourceType)
 {
 	Image.Bind();
-	return ilutLoadResource(hInst, ID, ResourceType, IL_TYPE_UNKNOWN);
+	_bstr_t b(ResourceType);
+	return ilutLoadResource(hInst, ID, b, IL_TYPE_UNKNOWN);
 }
 
 ILboolean ilWin32::GetResource(ilImage &Image, HINSTANCE hInst, ILint ID, char *ResourceType, ILenum Type)
 {
 	Image.Bind();
-	return ilutLoadResource(hInst, ID, ResourceType, Type);
+	_bstr_t b(ResourceType);
+	return ilutLoadResource(hInst, ID, b, Type);
 }
 
 ILboolean ilWin32::SetClipboard(ilImage &Image)
@@ -879,7 +883,8 @@ ILint ilState::GetInt(ILenum Mode)
 
 const char *ilState::GetString(ILenum StringName)
 {
-	return ilGetString(StringName);
+	_bstr_t b(ilGetString(StringName));
+	return b;
 }
 
 ILboolean ilState::IsDisabled(ILenum Mode)
@@ -917,7 +922,8 @@ void ilError::Check(void (*Callback)(const char*))
 	static ILenum Error;
 
 	while ((Error = ilGetError()) != IL_NO_ERROR) {
-		Callback(iluErrorString(Error));
+		_bstr_t b(iluErrorString(Error));
+		Callback(b);
 	}
 
 	return;
@@ -941,12 +947,14 @@ ILenum ilError::Get()
 
 const char *ilError::String()
 {
-	return iluErrorString(ilGetError());
+	_bstr_t b(iluErrorString(ilGetError()));
+	return b;
 }
 
 const char *ilError::String(ILenum Error)
 {
-	return iluErrorString(Error);
+	_bstr_t b(iluErrorString(Error));
+	return b;
 }
 
 #endif// DEVIL_CPP_WRAPPER_HPP

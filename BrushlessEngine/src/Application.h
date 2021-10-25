@@ -1,5 +1,7 @@
 #pragma once
 
+#include "glew.h"
+
 #include "Globals.h"
 #include "Timer.h"
 #include "Module.h"

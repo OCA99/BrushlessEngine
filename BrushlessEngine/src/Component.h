@@ -1,10 +1,12 @@
 #pragma once
 
 class GameObject;
+class Application;
 
 class Component {
 public:
-	Component(GameObject* gameObject);
+	Component(Application* app, GameObject* gameObject);
 
+	Application* app;
 	GameObject* gameObject;
 };

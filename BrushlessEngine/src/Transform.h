@@ -3,9 +3,11 @@
 #include "Component.h"
 #include "libraries/MathGeoLib/include/Math/float3.h"
 
+class Application;
+
 class Transform : public Component {
 public:
-	Transform(GameObject* gameObject);
+	Transform(Application* app, GameObject* gameObject);
 
 	float3 position;
 	float3 rotation;
