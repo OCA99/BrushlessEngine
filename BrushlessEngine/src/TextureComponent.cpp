@@ -1,10 +1,11 @@
-#include "Texture.h"
+#include "TextureComponent.h"
 
 #include "glew.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
 
-Texture::Texture(GameObject* gameObject) : Component(gameObject)
+#include "Application.h"
+#include "ModuleImport.h"
+
+Texture::Texture(Application* app, GameObject* gameObject) : Component(app, gameObject)
 {
 }
 
@@ -25,6 +26,22 @@ void Texture::SetTexture(const void* texture, unsigned int width, unsigned int h
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Texture::SetTexture(const char* path)
+{
+	glGenTextures(1, &textureId);
+	unsigned int id = app->import->ImportTexture(textureId, path);
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

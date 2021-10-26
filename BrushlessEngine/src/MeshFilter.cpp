@@ -1,5 +1,7 @@
 #include "MeshFilter.h"
 
-MeshFilter::MeshFilter(GameObject* gameObject) : Component(gameObject)
+#include "Application.h"
+
+MeshFilter::MeshFilter(Application* app, GameObject* gameObject) : Component(app, gameObject)
 {
 }

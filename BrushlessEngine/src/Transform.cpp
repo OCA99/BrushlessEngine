@@ -1,5 +1,6 @@
 #include "Transform.h"
+#include "Application.h"
 
-Transform::Transform(GameObject* gameObject) : Component(gameObject) {
+Transform::Transform(Application* app, GameObject* gameObject) : Component(gameObject) {
 	this->transform = IdentityMatrix;
 }

@@ -1,15 +1,15 @@
 #include "MeshRenderer.h"
 
 #include "glew.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
 
 #include "GameObject.h"
 #include "MeshFilter.h"
-#include "Texture.h"
 #include "Transform.h"
+#include "TextureComponent.h"
 
-MeshRenderer::MeshRenderer(GameObject* gameObject) : Component(gameObject) {
+#include "Application.h"
+
+MeshRenderer::MeshRenderer(Application* app, GameObject* gameObject) : Component(app, gameObject) {
 }
 
 void MeshRenderer::Render()

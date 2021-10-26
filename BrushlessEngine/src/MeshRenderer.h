@@ -2,9 +2,11 @@
 
 #include "Component.h"
 
+class Application;
+
 class MeshRenderer : public Component {
 public:
-	MeshRenderer(GameObject* gameObject);
+	MeshRenderer(Application* app, GameObject* gameObject);
 
 	void Render();
 private:

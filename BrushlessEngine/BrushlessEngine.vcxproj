@@ -92,13 +92,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\libraries\Glew\include;$(ProjectDir)src\libraries\Assimp\include;$(ProjectDir)src\libraries\MathGeoLib\include;$(ProjectDir)src\libraries\glmath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\libraries\DevIL\include;$(ProjectDir)src\libraries\Glew\include;$(ProjectDir)src\libraries\Assimp\include;$(ProjectDir)src\libraries\MathGeoLib\include;$(ProjectDir)src\libraries\glmath;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)src\libraries\Assimp\libx86;$(ProjectDir)src\libraries\MathGeoLib\libx86\Debug;$(ProjectDir)src\libraries\SDL\lib\x86;$(ProjectDir)src\libraries\Glew\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;MathGeoLib.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)src\libraries\DevIL\libx86;$(ProjectDir)src\libraries\Assimp\libx86;$(ProjectDir)src\libraries\MathGeoLib\libx86\Debug;$(ProjectDir)src\libraries\SDL\lib\x86;$(ProjectDir)src\libraries\Glew\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;MathGeoLib.lib;assimp.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -177,7 +177,7 @@
     <ClCompile Include="src\ModuleRenderer3D.cpp" />
     <ClCompile Include="src\ModuleWindow.cpp" />
     <ClCompile Include="src\BrushlessScene.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\TextureComponent.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
@@ -255,7 +255,7 @@
     <ClInclude Include="src\ModuleRenderer3D.h" />
     <ClInclude Include="src\ModuleWindow.h" />
     <ClInclude Include="src\BrushlessScene.h" />
-    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\TextureComponent.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\UIComponent.h" />

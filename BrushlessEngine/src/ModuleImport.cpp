@@ -6,6 +6,8 @@
 #include "scene.h"
 #include "postprocess.h"
 
+#include "devil_cpp_wrapper.hpp"
+
 #include "glew.h"
 
 ModuleImport::ModuleImport(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -25,13 +27,16 @@ bool ModuleImport::Init()
 bool ModuleImport::Start()
 {
 	glewInit();
+
+	ilInit();
+	iluInit();
+	ilutInit();
+	ilutRenderer(ILUT_OPENGL);
 	return true;
 }
 
 bool ModuleImport::CleanUp()
 {
-
-
 	return true;
 }
 
@@ -110,4 +115,21 @@ BrushlessMesh* ModuleImport::ImportMesh(aiMesh* aiMesh)
 	delete mesh;
 
 	return nullptr;
+}
+
+unsigned int ModuleImport::ImportTexture(unsigned int id, const char* path)
+{
+	wchar_t* wpath = GetWC(path);
+	ilBindImage(id);
+	unsigned int textureId = ilutGLLoadImage(wpath);
+	return textureId;
+}
+
+wchar_t* ModuleImport::GetWC(const char* c)
+{
+	const size_t cSize = strlen(c) + 1;
+	wchar_t* wc = new wchar_t[cSize];
+	mbstowcs(wc, c, cSize);
+
+	return wc;
 }

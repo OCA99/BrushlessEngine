@@ -11,7 +11,7 @@
 class UIComponent;
 class BrushlessScene;
 
-struct Log {
+struct BrushlessLog {
 	std::vector<std::string>* consoleLogs = new std::vector<std::string>();
 
 	void LOG(const char* format, ...) {
@@ -53,7 +53,7 @@ struct EditorState {
 	bool aboutWindowOpen = false;
 
 	Configuration configuration;
-	Log log;
+	BrushlessLog log;
 };
 
 class ModuleEditor : public Module
