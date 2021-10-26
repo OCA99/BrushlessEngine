@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "MeshFilter.h"
 #include "Texture.h"
+#include "Transform.h"
 
 MeshRenderer::MeshRenderer(GameObject* gameObject) : Component(gameObject) {
 }
@@ -18,6 +19,7 @@ void MeshRenderer::Render()
 	DrawNormals();
 	DrawTexture();
 	BindIndices();
+	ApplyTransform();
 	DrawElements();
 	EndRender();
 }
@@ -64,6 +66,13 @@ void MeshRenderer::DrawTexture()
 void MeshRenderer::BindIndices()
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gameObject->meshFilter->mesh->indexBuffer);
+}
+
+void MeshRenderer::ApplyTransform()
+{
+	glPushMatrix();
+	glMultMatrixf(gameObject->transform->transform.M);
+	glPopMatrix();
 }
 
 void MeshRenderer::DrawElements()

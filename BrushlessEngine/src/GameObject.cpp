@@ -14,6 +14,8 @@ GameObject::GameObject(std::string name, bool active = true) {
 	this->meshRenderer = new MeshRenderer(this);
 	this->texture = new Texture(this);
 	this->texture->SetCheckerboxTexture();
+
+	this->transform->transform.translate(10, 10, 10);
 }
 
 GameObject::~GameObject()

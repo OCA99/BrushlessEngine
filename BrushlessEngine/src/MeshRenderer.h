@@ -15,5 +15,6 @@ private:
 	void DrawNormals();
 	void DrawTexture();
 	void BindIndices();
+	void ApplyTransform();
 	void DrawElements();
 };

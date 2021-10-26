@@ -1,13 +1,11 @@
 #pragma once
 
 #include "Component.h"
-#include "libraries/MathGeoLib/include/Math/float3.h"
+#include "glmath.h"
 
 class Transform : public Component {
 public:
 	Transform(GameObject* gameObject);
 
-	float3 position;
-	float3 rotation;
-	float3 scale;
+	mat4x4 transform;
 };
