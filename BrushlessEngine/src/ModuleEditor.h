@@ -14,6 +14,15 @@ class BrushlessScene;
 
 struct BrushlessLog {
 	std::vector<std::string>* consoleLogs = new std::vector<std::string>();
+	float frameLogs[100];
+	int frameLogsIndex = 0;
+	float frameMSLogs[100];
+	int frameMSLogsIndex = 0;
+
+	void Init() {
+		memset(frameLogs, 0, 100);
+		memset(frameMSLogs, 0, 100);
+	}
 
 	void LOG(const char* format, ...) {
 		static char tmp_string[4096];
@@ -27,6 +36,28 @@ struct BrushlessLog {
 
 	void LOGDirect(const char* message) {
 		consoleLogs->push_back(std::string(message));
+	}
+
+	void LOGFrames(float frames) {
+		frameLogs[frameLogsIndex] = frames;
+		if (frameLogsIndex <= 99) frameLogsIndex++;
+		if (frameLogsIndex > 99) {
+			for (int i = 0; i < 99; i++) {
+				frameLogs[i] = frameLogs[i + 1];
+			}
+			frameLogsIndex--;
+		}
+	}
+
+	void LOGMSFrames(float ms) {
+		frameMSLogs[frameMSLogsIndex] = ms;
+		if (frameMSLogsIndex <= 99) frameMSLogsIndex++;
+		if (frameMSLogsIndex > 99) {
+			for (int i = 0; i < 99; i++) {
+				frameMSLogs[i] = frameMSLogs[i + 1];
+			}
+			frameMSLogsIndex--;
+		}
 	}
 };
 

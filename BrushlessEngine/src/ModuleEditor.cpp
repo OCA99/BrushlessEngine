@@ -70,6 +70,8 @@ bool ModuleEditor::Init()
 	const unsigned int severity = Assimp::Logger::Debugging | Assimp::Logger::Info | Assimp::Logger::Err | Assimp::Logger::Warn;
 	Assimp::DefaultLogger::get()->attachStream(new AssimpStream(&state.log), severity);
 
+	state.log.Init();
+
 	return ret;
 }
 

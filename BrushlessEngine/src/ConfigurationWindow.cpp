@@ -14,10 +14,14 @@ update_status ConfigurationWindow::Update() {
 		if (ImGui::BeginTabItem("Application"))
 		{
 			ImGui::InputText("Application name", app->editor->state.applicationName, IM_ARRAYSIZE(app->editor->state.applicationName));
-			ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
-			ImGui::Text("Milliseconds per frame: %.3f", 1000.0f / ImGui::GetIO().Framerate);
+			//ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
+			//ImGui::Text("Milliseconds per frame: %.3f", 1000.0f / ImGui::GetIO().Framerate);
 
 			ImGui::SliderInt("FPS", &app->targetFPS, 1, 60, NULL, 0);
+
+			ImGui::PlotHistogram("FPS", app->editor->state.log.frameLogs, 100, 0, ("FPS: " + std::to_string(ImGui::GetIO().Framerate)).c_str(), 0, 120.0f, ImVec2(ImGui::CalcItemWidth(), 70.0f));
+			ImGui::PlotHistogram("MS", app->editor->state.log.frameMSLogs, 100, 0, ("MS: " + std::to_string(1000.0f / ImGui::GetIO().Framerate)).c_str(), 0, 120.0f, ImVec2(ImGui::CalcItemWidth(), 70.0f));
+
 			ImGui::Checkbox("Console", &app->editor->state.consoleWindowOpen);
 			ImGui::EndTabItem();
 		}

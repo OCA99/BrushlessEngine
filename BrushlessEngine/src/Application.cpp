@@ -1,6 +1,8 @@
 #include "Application.h"
 #include <List>
 
+#include "libraries/imgui/imgui.h"
+
 Application::Application()
 {
 	window = new ModuleWindow(this);
@@ -80,6 +82,9 @@ void Application::FinishUpdate()
 		SDL_Delay(targetDt - dt);
 		dt = targetDt;
 	}
+
+	editor->state.log.LOGFrames(ImGui::GetIO().Framerate);
+	editor->state.log.LOGMSFrames(1000.0f / ImGui::GetIO().Framerate);
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
