@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleImport.h"
+#include "ModuleEditor.h"
 
 #include "cimport.h"
 #include "scene.h"

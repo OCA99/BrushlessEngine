@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleEditor.h"
+#include "ModuleWindow.h"
+#include "ModuleCamera3D.h"
 #include "libraries/SDL/include/SDL_opengl.h"
 
 #include "BrushlessScene.h"

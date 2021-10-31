@@ -71,8 +71,6 @@ int main(int argc, char ** argv)
 		}
 	}
 
-	App->editor->state.log.LOG("Exiting game '%s'...", TITLE);
-
 	delete App;
 	return main_return;
 }

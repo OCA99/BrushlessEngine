@@ -1,6 +1,13 @@
 #include "Application.h"
 #include <List>
 
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ModuleRenderer3D.h"
+#include "ModuleCamera3D.h"
+#include "ModuleEditor.h"
+#include "ModuleImport.h"
+
 #include "libraries/imgui/imgui.h"
 
 Application::Application()

@@ -8,12 +8,12 @@
 
 #include <vector>
 
-#include "ModuleWindow.h"
-#include "ModuleInput.h"
-#include "ModuleRenderer3D.h"
-#include "ModuleCamera3D.h"
-#include "ModuleEditor.h"
-#include "ModuleImport.h"
+class ModuleWindow;
+class ModuleInput;
+class ModuleRenderer3D;
+class ModuleCamera3D;
+class ModuleEditor;
+class ModuleImport;
 
 class Application
 {

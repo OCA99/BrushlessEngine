@@ -1,5 +1,7 @@
 #include "ConfigurationWindow.h"
 #include "ModuleEditor.h"
+#include "Hardware.h"
+#include "libraries/imgui/imgui.h"
 
 #include <gl/GL.h>
 
@@ -52,6 +54,11 @@ update_status ConfigurationWindow::Update() {
 		}
 		if (ImGui::BeginTabItem("Hardware"))
 		{
+			Hardware* h = Hardware::GetHardware();
+
+			ImGui::Text("SDL Version: %d.%d.%d", h->sdlVersion.major, h->sdlVersion.minor, h->sdlVersion.patch);
+
+			delete h;
 			ImGui::EndTabItem();
 		}
 		if (ImGui::BeginTabItem("Open GL"))

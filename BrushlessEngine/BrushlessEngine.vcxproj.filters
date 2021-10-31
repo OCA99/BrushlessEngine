@@ -100,6 +100,12 @@
     <ClCompile Include="src\TextureComponent.cpp">
       <Filter>game_object\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hardware.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libraries\GPUDetect\include\DeviceId.cpp">
+      <Filter>libraries\GPUDetect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -333,6 +339,15 @@
     <ClInclude Include="src\TextureComponent.h">
       <Filter>game_object\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Hardware.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\GPUDetect\include\DeviceId.h">
+      <Filter>libraries\GPUDetect</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libraries\GPUDetect\include\dxgi1_4.h">
+      <Filter>libraries\GPUDetect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">
@@ -373,6 +388,9 @@
     </Filter>
     <Filter Include="game_object\utils">
       <UniqueIdentifier>{8c30ee9c-c054-4639-a78d-a3f5de388bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\GPUDetect">
+      <UniqueIdentifier>{7da7af87-97e5-4e7c-8c82-b059864660b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
 #include "MainMenuBar.h"
+#include "ModuleEditor.h"
 
 MainMenuBar::MainMenuBar(Application* app, std::string title, bool* open, ImGuiWindowFlags flags) : UIComponent(app, title, open, flags)
 {}
