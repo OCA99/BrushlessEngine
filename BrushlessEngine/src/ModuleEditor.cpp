@@ -26,6 +26,9 @@
 
 #include "libraries/json/json.hpp"
 
+#include "Logger.hpp"
+#include "DefaultLogger.hpp"
+
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 }
@@ -62,6 +65,11 @@ bool ModuleEditor::Init()
 
 	memset(state.applicationName, 0, 64);
 
+	Assimp::DefaultLogger::create("", Assimp::Logger::VERBOSE);
+
+	const unsigned int severity = Assimp::Logger::Debugging | Assimp::Logger::Info | Assimp::Logger::Err | Assimp::Logger::Warn;
+	Assimp::DefaultLogger::get()->attachStream(new AssimpStream(&state.log), severity);
+
 	return ret;
 }
 
@@ -69,9 +77,10 @@ bool ModuleEditor::Start()
 {
 	bool ret = true;
 
+	glewInit();
+
 	InitializeUI();
 	LoadScene("Assets/BakerHouse.fbx");
-	LoadScene("Assets/monkey.fbx");
 
 	return ret;
 }
@@ -191,6 +200,8 @@ bool ModuleEditor::CleanUp()
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
+
+	Assimp::DefaultLogger::kill();
 
 	return true;
 }

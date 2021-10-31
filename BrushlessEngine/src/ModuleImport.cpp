@@ -26,8 +26,6 @@ bool ModuleImport::Init()
 
 bool ModuleImport::Start()
 {
-	glewInit();
-
 	ilInit();
 	iluInit();
 	ilutInit();

@@ -7,6 +7,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
+#include "LogStream.hpp"
 
 class UIComponent;
 class BrushlessScene;
@@ -23,6 +24,28 @@ struct BrushlessLog {
 		va_end(ap);
 		consoleLogs->push_back(std::string(tmp_string));
 	}
+
+	void LOGDirect(const char* message) {
+		consoleLogs->push_back(std::string(message));
+	}
+};
+
+class AssimpStream : public Assimp::LogStream {
+public:
+	AssimpStream(BrushlessLog* log) {
+		this->log = log;
+	}
+
+	~AssimpStream() {
+
+	}
+
+	void write(const char* message) {
+		this->log->LOGDirect(message);
+	}
+
+private:
+	BrushlessLog* log;
 };
 
 struct OpenGLConfig {
