@@ -8,7 +8,7 @@ class MeshRenderer : public Component {
 public:
 	MeshRenderer(Application* app, GameObject* gameObject);
 
-	void Render();
+	void PostUpdate();
 private:
 	void InitRender();
 	void EndRender();

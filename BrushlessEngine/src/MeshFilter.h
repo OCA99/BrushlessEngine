@@ -9,5 +9,7 @@ class MeshFilter : public Component {
 public:
 	MeshFilter(Application* app, GameObject* gameObject);
 
+	void Init();
+
 	BrushlessMesh* mesh;
 };

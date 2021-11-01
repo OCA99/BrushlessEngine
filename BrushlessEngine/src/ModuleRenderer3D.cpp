@@ -133,7 +133,13 @@ update_status ModuleRenderer3D::Update(float dt)
 
 	if (scene != nullptr) {
 		for (int i = 0; i < scene->objects.size(); i++) {
-			scene->objects[i]->meshRenderer->Render();
+			GameObject* gameObject = scene->objects[i];
+			gameObject->Update(dt);
+		}
+
+		for (int i = 0; i < scene->objects.size(); i++) {
+			GameObject* gameObject = scene->objects[i];
+			gameObject->PostUpdate();
 		}
 	}
 
@@ -143,6 +149,7 @@ update_status ModuleRenderer3D::Update(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+
 	SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
 }

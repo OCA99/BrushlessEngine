@@ -12,17 +12,58 @@ GameObject::GameObject(Application* app, std::string name, bool active = true) {
 	this->name = name;
 	this->active = active;
 	
-	this->transform = new Transform(app, this);
-	this->meshFilter = new MeshFilter(app, this);
-	this->meshRenderer = new MeshRenderer(app, this);
-	this->texture = new Texture(app, this);
-	this->texture->SetTexture("Assets/Textures/Lenna.png");
+	AddComponent(new Transform(app, this));
+	AddComponent(new MeshFilter(app, this));
+	AddComponent(new MeshRenderer(app, this));
+	AddComponent(new Texture(app, this));
+	((Texture*)GetComponent(Component::COMPONENT_TYPE::TEXTURE))->SetTexture("Assets/Textures/Lenna.png");
 }
 
 GameObject::~GameObject()
 {
-	delete transform;
-	delete meshFilter;
-	delete meshRenderer;
-	delete texture;
+	for (auto c : components)
+	{
+		delete c;
+	}
+
+	components.clear();
+}
+
+void GameObject::Init()
+{
+	for (auto c : components)
+	{
+		c->Init();
+	}
+}
+
+void GameObject::Update(float dt)
+{
+	for (auto c : components)
+	{
+		c->Update(dt);
+	}
+}
+
+void GameObject::PostUpdate()
+{
+	for (auto c : components)
+	{
+		c->PostUpdate();
+	}
+}
+
+void GameObject::AddComponent(Component* component)
+{
+	components.push_back(component);
+}
+
+Component* GameObject::GetComponent(Component::COMPONENT_TYPE type)
+{
+	for (auto c : components)
+	{
+		if (c->type == type) return c;
+	}
+
+	return nullptr;
 }

@@ -5,7 +5,7 @@
 #include "Application.h"
 #include "ModuleImport.h"
 
-Texture::Texture(Application* app, GameObject* gameObject) : Component(app, gameObject)
+Texture::Texture(Application* app, GameObject* gameObject) : Component(app, gameObject, Component::COMPONENT_TYPE::TEXTURE)
 {
 }
 
