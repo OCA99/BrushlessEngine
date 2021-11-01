@@ -1,4 +1,5 @@
 #include "libraries/SDL/include/SDL.h"
+#include "glew.h"
 
 #include <string>
 
@@ -38,6 +39,8 @@ public:
 	static Hardware* GetHardware();
 
 	SDL_version sdlVersion;
+	const GLubyte* glVersion;
+	
 	CPU cpu;
 	float ram;
 	CAPS caps;

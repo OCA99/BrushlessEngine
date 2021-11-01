@@ -57,6 +57,31 @@ update_status ConfigurationWindow::Update() {
 			Hardware* h = Hardware::GetHardware();
 
 			ImGui::Text("SDL Version: %d.%d.%d", h->sdlVersion.major, h->sdlVersion.minor, h->sdlVersion.patch);
+			ImGui::Text("OpenGL Version: %s", h->glVersion);
+
+			ImGui::Separator();
+
+			ImGui::Text("CPU Cores: %d", h->cpu.cpuCount);
+			ImGui::Text("CPU Cache Line Size: %d", h->cpu.cpuCacheLineSize);
+
+			ImGui::Separator();
+
+			ImGui::Text("System RAM: %.2fGB", h->ram);
+
+			ImGui::Separator();
+
+			ImGui::Text("GPU Vendor: %d", h->gpu.vendor);
+			ImGui::Text("GPU ID: %d", h->gpu.id);
+			ImGui::Text("GPU Name: %ls", h->gpu.name.c_str());
+			ImGui::Text("GPU Memory Budget: %lldMB", h->gpu.budget);
+			ImGui::Text("GPU Memory Usage: %lldMB", h->gpu.usage);
+			ImGui::Text("GPU Memory Available: %lldMB", h->gpu.available);
+			ImGui::Text("GPU Memory Reserved: %lldMB", h->gpu.reserved);
+
+			ImGui::Separator();
+
+			CAPS c = h->caps;
+			ImGui::Text("CAPS: %s%s%s%s%s%s%s%s%s%s%s", c._3DNow ? "3DNow, " : "", c.altiVec ? "AltiVec, " : "", c.avx ? "AVX, " : "", c.avx2 ? "AVX2, " : "", c.mmx ? "MMX, " : "", c.rdtsc ? "RDTSC, " : "", c.sse ? "SSE, " : "", c.sse2 ? "SSE2, " : "", c.sse3 ? "SSE3, " : "", c.sse41 ? "SSE41, " : "", c.sse42 ? "SSE42" : "");
 
 			delete h;
 			ImGui::EndTabItem();

@@ -6,6 +6,7 @@ Hardware* Hardware::GetHardware()
 	Hardware* h = new Hardware();
 
 	SDL_GetVersion(&h->sdlVersion);
+	h->glVersion = glGetString(GL_VERSION);
 
 	h->cpu.cpuCount = SDL_GetCPUCount();
 	h->cpu.cpuCacheLineSize = SDL_GetCPUCacheLineSize();
