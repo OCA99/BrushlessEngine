@@ -83,6 +83,8 @@ BrushlessNode* ModuleImport::ImportNode(aiNode* node, const aiScene* scene)
 	result->scale = float3(scaling.x, scaling.y, scaling.z);
 	result->rot = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
 
+	result->name = node->mName.C_Str();
+
 	return result;
 }
 

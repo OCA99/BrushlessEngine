@@ -108,6 +108,7 @@ struct EditorState {
 	bool demoWindowOpen = false;
 	bool consoleWindowOpen = false;
 	bool aboutWindowOpen = false;
+	bool hierarachyWindowOpen = false;
 
 	Configuration configuration;
 	BrushlessLog log;
@@ -137,6 +138,7 @@ public:
 	std::vector<UIComponent*> components;
 	EditorState state;
 
+	GameObject* selectedObject = nullptr;
 	BrushlessScene* currentScene = nullptr;
 
 private:

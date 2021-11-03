@@ -26,6 +26,11 @@ update_status MainMenuBar::Update() {
 	if (ImGui::BeginMenu("Edit"))
 	{
 		ImGui::MenuItem("Settings", nullptr, &app->editor->state.configurationWindowOpen);
+		ImGui::EndMenu();
+	}
+	if (ImGui::BeginMenu("Windows"))
+	{
+		ImGui::MenuItem("Hierarchy", nullptr, &app->editor->state.hierarachyWindowOpen);
 		ImGui::MenuItem("Console", nullptr, &app->editor->state.consoleWindowOpen);
 		ImGui::EndMenu();
 	}

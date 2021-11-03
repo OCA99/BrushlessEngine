@@ -4,6 +4,7 @@
 #include "Color.h"
 #include "Component.h"
 #include <vector>
+#include <string>
 #include "glmath.h"
 #include "libraries/MathGeoLib/include/Math/float3.h"
 #include "libraries/MathGeoLib/include/Math/Quat.h"
@@ -17,6 +18,8 @@ public:
 
 	BrushlessNode();
 	virtual	~BrushlessNode();
+
+	std::string name;
 
 	std::vector<BrushlessNode*> children;
 	std::vector<BrushlessMesh*> meshes;

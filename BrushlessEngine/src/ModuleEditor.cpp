@@ -11,6 +11,7 @@
 #include "DemoWindow.h"
 #include "ConsoleWindow.h"
 #include "AboutWindow.h"
+#include "HierarchyWindow.h"
 
 #include "GameObject.h"
 #include "BrushlessScene.h"
@@ -214,6 +215,8 @@ GameObject* ModuleEditor::CreateGameObject(BrushlessNode* node, GameObject* pare
 	Transform* transform = (Transform*)object->GetComponent(Component::COMPONENT_TYPE::TRANSFORM);
 	transform->transform = float4x4(node->rot, node->position);
 
+	object->name = node->name;
+
 	return object;
 }
 
@@ -238,5 +241,6 @@ void ModuleEditor::InitializeUI()
 	AddComponent(new DemoWindow(App, "Demo", &state.demoWindowOpen, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new ConsoleWindow(App, "Console", &state.consoleWindowOpen, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new AboutWindow(App, "About", &state.aboutWindowOpen, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new HierarchyWindow(App, "About", &state.hierarachyWindowOpen, ImGuiWindowFlags_NoCollapse));
 }
 
