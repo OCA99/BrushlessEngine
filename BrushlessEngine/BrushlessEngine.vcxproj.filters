@@ -717,6 +717,9 @@
     <ClInclude Include="src\InspectorWindow.h">
       <Filter>ui_components</Filter>
     </ClInclude>
+    <ClInclude Include="src\StringEndsWith.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="libraries">

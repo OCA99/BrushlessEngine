@@ -21,7 +21,7 @@ bool Texture::DrawInspector()
 	if (ImGui::TreeNodeEx("Texture"))
 	{
 		ImGui::Text("SIZE: %d, %d", width, height);
-		ImGui::Text("PATH: %s", texturePath);
+		ImGui::Text("PATH: %s", texturePath.c_str());
 
 		if (ImGui::Button("Checkerbox"))
 		{
@@ -56,12 +56,12 @@ void Texture::SetTexture(const void* texture, unsigned int w, unsigned int h)
 	texturePath = "Procedural Texture";
 }
 
-void Texture::SetTexture(const char* path)
+void Texture::SetTexture(std::string path)
 {
 	DeleteTexture();
 
 	glGenTextures(1, &textureId);
-	unsigned int id = app->import->ImportTexture(textureId, path);
+	unsigned int id = app->import->ImportTexture(textureId, path.c_str());
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glBindTexture(GL_TEXTURE_2D, textureId);

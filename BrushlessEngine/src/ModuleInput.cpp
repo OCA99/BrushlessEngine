@@ -2,6 +2,13 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleEditor.h"
+
+#include "StringEndsWith.h"
+#include "GameObject.h"
+#include "TextureComponent.h"
+
+#include <string>
 
 #define MAX_KEYS 300
 
@@ -85,6 +92,8 @@ update_status ModuleInput::PreUpdate(float dt)
 
 	bool quit = false;
 	SDL_Event e;
+	std::string path = "";
+	Texture* textureComponent = nullptr;
 	while(SDL_PollEvent(&e))
 	{
 		switch(e.type)
@@ -104,6 +113,23 @@ update_status ModuleInput::PreUpdate(float dt)
 			case SDL_QUIT:
 			quit = true;
 			break;
+
+			case SDL_DROPFILE:
+				path = e.drop.file;
+				if (endsWith(path, ".fbx"))
+				{
+					App->editor->state.log.LOG("Dropped scene: %s", path.c_str());
+					App->editor->LoadScene(path.c_str());
+				}
+				else if (endsWith(path, ".png"))
+				{
+					if (App->editor->selectedObject != nullptr)
+					{
+						App->editor->state.log.LOG("Dropped texture: %s", path.c_str());
+						textureComponent = (Texture*)App->editor->selectedObject->GetComponent(Component::COMPONENT_TYPE::TEXTURE);
+						textureComponent->SetTexture(path);
+					}
+				}
 
 			case SDL_WINDOWEVENT:
 			{

@@ -383,6 +383,7 @@
     <ClInclude Include="src\ModuleRenderer3D.h" />
     <ClInclude Include="src\ModuleWindow.h" />
     <ClInclude Include="src\BrushlessScene.h" />
+    <ClInclude Include="src\StringEndsWith.h" />
     <ClInclude Include="src\TextureComponent.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Transform.h" />

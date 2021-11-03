@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include <string>
 
 class Application;
 
@@ -14,12 +15,12 @@ public:
 	bool DrawInspector();
 
 	void SetTexture(const void* texture, unsigned int width, unsigned int height);
-	void SetTexture(const char* path);
+	void SetTexture(std::string path);
 	void SetCheckerboxTexture();
 
 	void DeleteTexture();
 
-	const char* texturePath = nullptr;
+	std::string texturePath = "No texture";
 	int width, height = 0;
 	unsigned int textureId = 0;
 };
