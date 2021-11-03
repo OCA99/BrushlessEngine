@@ -12,6 +12,7 @@
 #include "ConsoleWindow.h"
 #include "AboutWindow.h"
 #include "HierarchyWindow.h"
+#include "InspectorWindow.h"
 
 #include "GameObject.h"
 #include "BrushlessScene.h"
@@ -85,8 +86,8 @@ bool ModuleEditor::Start()
 	glewInit();
 
 	InitializeUI();
-	//LoadScene("Assets/BakerHouse.fbx");
-	LoadScene("Assets/monkey.fbx");
+	LoadScene("Assets/BakerHouse.fbx");
+	//LoadScene("Assets/monkey.fbx");
 
 	return ret;
 }
@@ -241,6 +242,7 @@ void ModuleEditor::InitializeUI()
 	AddComponent(new DemoWindow(App, "Demo", &state.demoWindowOpen, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new ConsoleWindow(App, "Console", &state.consoleWindowOpen, ImGuiWindowFlags_NoCollapse));
 	AddComponent(new AboutWindow(App, "About", &state.aboutWindowOpen, ImGuiWindowFlags_NoCollapse));
-	AddComponent(new HierarchyWindow(App, "About", &state.hierarachyWindowOpen, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new HierarchyWindow(App, "Hierarchy", &state.hierarachyWindowOpen, ImGuiWindowFlags_NoCollapse));
+	AddComponent(new InspectorWindow(App, "Inspector", &state.inspectorWindowOpen, ImGuiWindowFlags_NoCollapse));
 }
 

@@ -5,6 +5,8 @@
 #include "Application.h"
 #include "ModuleImport.h"
 
+#include "libraries/imgui/imgui.h"
+
 Texture::Texture(Application* app, GameObject* gameObject) : Component(app, gameObject, Component::COMPONENT_TYPE::TEXTURE)
 {
 }
@@ -14,8 +16,28 @@ Texture::~Texture()
 	glDeleteTextures(1, &textureId);
 }
 
-void Texture::SetTexture(const void* texture, unsigned int width, unsigned int height)
+bool Texture::DrawInspector()
 {
+	if (ImGui::TreeNodeEx("Texture"))
+	{
+		ImGui::Text("SIZE: %d, %d", width, height);
+		ImGui::Text("PATH: %s", texturePath);
+
+		if (ImGui::Button("Checkerbox"))
+		{
+			SetCheckerboxTexture();
+		}
+
+		ImGui::TreePop();
+	}
+
+	return true;
+}
+
+void Texture::SetTexture(const void* texture, unsigned int w, unsigned int h)
+{
+	DeleteTexture();
+
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glGenTextures(1, &textureId);
 	glBindTexture(GL_TEXTURE_2D, textureId);
@@ -25,24 +47,36 @@ void Texture::SetTexture(const void* texture, unsigned int width, unsigned int h
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	width = w;
+	height = h;
+
+	texturePath = "Procedural Texture";
 }
 
 void Texture::SetTexture(const char* path)
 {
+	DeleteTexture();
+
 	glGenTextures(1, &textureId);
 	unsigned int id = app->import->ImportTexture(textureId, path);
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glBindTexture(GL_TEXTURE_2D, textureId);
 
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &width);
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &height);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	texturePath = path;
 }
 
 void Texture::SetCheckerboxTexture()
@@ -60,4 +94,10 @@ void Texture::SetCheckerboxTexture()
 	}
 
 	SetTexture(texture, 32, 32);
+}
+
+void Texture::DeleteTexture()
+{
+	if (textureId != 0)
+		glDeleteTextures(1, &textureId);
 }

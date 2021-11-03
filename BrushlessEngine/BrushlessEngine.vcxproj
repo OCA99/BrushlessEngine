@@ -161,6 +161,7 @@
     <ClCompile Include="src\glmath.cpp" />
     <ClCompile Include="src\Hardware.cpp" />
     <ClCompile Include="src\HierarchyWindow.cpp" />
+    <ClCompile Include="src\InspectorWindow.cpp" />
     <ClCompile Include="src\libraries\GPUDetect\include\DeviceId.cpp" />
     <ClCompile Include="src\libraries\imgui\imgui.cpp" />
     <ClCompile Include="src\libraries\imgui\imgui_demo.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="src\Globals.h" />
     <ClInclude Include="src\Hardware.h" />
     <ClInclude Include="src\HierarchyWindow.h" />
+    <ClInclude Include="src\InspectorWindow.h" />
     <ClInclude Include="src\libraries\Assimp\include\ai_assert.h" />
     <ClInclude Include="src\libraries\Assimp\include\anim.h" />
     <ClInclude Include="src\libraries\Assimp\include\camera.h" />

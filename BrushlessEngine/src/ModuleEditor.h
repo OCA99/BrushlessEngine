@@ -109,6 +109,7 @@ struct EditorState {
 	bool consoleWindowOpen = false;
 	bool aboutWindowOpen = false;
 	bool hierarachyWindowOpen = false;
+	bool inspectorWindowOpen = false;
 
 	Configuration configuration;
 	BrushlessLog log;

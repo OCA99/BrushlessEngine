@@ -11,6 +11,7 @@ public:
 	MeshFilter(Application* app, GameObject* gameObject);
 
 	void Init();
+	bool DrawInspector();
 
 	std::vector<BrushlessMesh*> meshes;
 };

@@ -31,6 +31,7 @@ update_status MainMenuBar::Update() {
 	if (ImGui::BeginMenu("Windows"))
 	{
 		ImGui::MenuItem("Hierarchy", nullptr, &app->editor->state.hierarachyWindowOpen);
+		ImGui::MenuItem("Inspector", nullptr, &app->editor->state.inspectorWindowOpen);
 		ImGui::MenuItem("Console", nullptr, &app->editor->state.consoleWindowOpen);
 		ImGui::EndMenu();
 	}

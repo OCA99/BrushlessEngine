@@ -9,6 +9,8 @@ public:
 	MeshRenderer(Application* app, GameObject* gameObject);
 
 	void PostUpdate();
+
+	bool DrawInspector();
 private:
 	void InitRender();
 	void EndRender();
@@ -19,4 +21,14 @@ private:
 	void BindIndices();
 	void ApplyTransform();
 	void DrawElements();
+	void DrawVertexNormals();
+	void DrawFaceNormals();
+
+	struct Settings {
+		bool wireframe = false;
+		bool vertexNormals = false;
+		bool faceNormals = false;
+	};
+
+	Settings settings;
 };

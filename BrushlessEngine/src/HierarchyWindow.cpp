@@ -22,16 +22,18 @@ void HierarchyWindow::DrawTreeNode(std::vector<GameObject*> objects)
 {
 	for (auto object : objects)
 	{
-		if (ImGui::TreeNodeEx(object->name.c_str()))
-		{
-			DrawTreeNode(object->children);
-			ImGui::TreePop();
-		}
+		bool open = ImGui::TreeNodeEx(object->name.c_str());
 
 		if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
 		{
 			app->editor->selectedObject = object;
 			app->editor->state.log.LOG("Selected object: %s", object->name.c_str());
+		}
+
+		if (open)
+		{
+			DrawTreeNode(object->children);
+			ImGui::TreePop();
 		}
 	}
 }

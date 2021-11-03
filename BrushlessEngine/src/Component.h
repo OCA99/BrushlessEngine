@@ -18,6 +18,8 @@ public:
 	virtual void Update(float dt) {};
 	virtual void PostUpdate() {};
 
+	virtual bool DrawInspector() { return false; };
+
 	Application* app;
 	GameObject* gameObject;
 	COMPONENT_TYPE type;

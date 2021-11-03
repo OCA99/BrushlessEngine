@@ -238,6 +238,9 @@
     <ClCompile Include="src\HierarchyWindow.cpp">
       <Filter>ui_components</Filter>
     </ClCompile>
+    <ClCompile Include="src\InspectorWindow.cpp">
+      <Filter>ui_components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\libraries\imgui\imconfig.h">
@@ -709,6 +712,9 @@
       <Filter>libraries\MathGeoLib</Filter>
     </ClInclude>
     <ClInclude Include="src\HierarchyWindow.h">
+      <Filter>ui_components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InspectorWindow.h">
       <Filter>ui_components</Filter>
     </ClInclude>
   </ItemGroup>
