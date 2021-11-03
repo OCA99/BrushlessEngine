@@ -16,8 +16,6 @@ update_status ConfigurationWindow::Update() {
 		if (ImGui::BeginTabItem("Application"))
 		{
 			ImGui::InputText("Application name", app->editor->state.applicationName, IM_ARRAYSIZE(app->editor->state.applicationName));
-			//ImGui::Text("FPS: %.3f", ImGui::GetIO().Framerate);
-			//ImGui::Text("Milliseconds per frame: %.3f", 1000.0f / ImGui::GetIO().Framerate);
 
 			ImGui::SliderInt("FPS", &app->targetFPS, 1, 60, NULL, 0);
 

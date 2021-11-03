@@ -33,6 +33,8 @@ void MeshRenderer::InitRender()
 
 void MeshRenderer::EndRender()
 {
+	glPopMatrix();
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_NORMAL_ARRAY, 0);
 	glBindBuffer(GL_TEXTURE_COORD_ARRAY, 0);
@@ -47,42 +49,56 @@ void MeshRenderer::EndRender()
 void MeshRenderer::DrawVertices()
 {
 	MeshFilter* meshFilter = (MeshFilter*)gameObject->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
-	glBindBuffer(GL_ARRAY_BUFFER, meshFilter->mesh->vertexBuffer);
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	for (int i = 0; i < meshFilter->meshes.size(); i++)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, meshFilter->meshes[i]->vertexBuffer);
+		glVertexPointer(3, GL_FLOAT, 0, NULL);
+	}
 }
 
 void MeshRenderer::DrawNormals()
 {
 	MeshFilter* meshFilter = (MeshFilter*)gameObject->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
-	glBindBuffer(GL_NORMAL_ARRAY, meshFilter->mesh->normalsBuffer);
-	glNormalPointer(GL_FLOAT, 0, NULL);
+	for (int i = 0; i < meshFilter->meshes.size(); i++)
+	{
+		glBindBuffer(GL_NORMAL_ARRAY, meshFilter->meshes[i]->normalsBuffer);
+		glNormalPointer(GL_FLOAT, 0, NULL);
+	}
 }
 
 void MeshRenderer::DrawTexture()
 {
 	MeshFilter* meshFilter = (MeshFilter*)gameObject->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
 	Texture* texture = (Texture*)gameObject->GetComponent(Component::COMPONENT_TYPE::TEXTURE);
-	glBindBuffer(GL_ARRAY_BUFFER, meshFilter->mesh->textureBuffer);
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-	glBindTexture(GL_TEXTURE_2D, texture->textureId);
+	for (int i = 0; i < meshFilter->meshes.size(); i++)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, meshFilter->meshes[i]->textureBuffer);
+		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+		glBindTexture(GL_TEXTURE_2D, texture->textureId);
+	}
 }
 
 void MeshRenderer::BindIndices()
 {
 	MeshFilter* meshFilter = (MeshFilter*)gameObject->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, meshFilter->mesh->indexBuffer);
+	for (int i = 0; i < meshFilter->meshes.size(); i++)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, meshFilter->meshes[i]->indexBuffer);
+	}
 }
 
 void MeshRenderer::ApplyTransform()
 {
 	glPushMatrix();
 	Transform* transform = (Transform*)gameObject->GetComponent(Component::COMPONENT_TYPE::TRANSFORM);
-	glMultMatrixf(transform->transform.M);
-	glPopMatrix();
+	glMultMatrixf(transform->transform.Transposed().ptr());
 }
 
 void MeshRenderer::DrawElements()
 {
 	MeshFilter* meshFilter = (MeshFilter*)gameObject->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
-	glDrawElements(GL_TRIANGLES, meshFilter->mesh->indexCount, GL_UNSIGNED_INT, NULL);
+	for (int i = 0; i < meshFilter->meshes.size(); i++)
+	{
+		glDrawElements(GL_TRIANGLES, meshFilter->meshes[i]->indexCount, GL_UNSIGNED_INT, NULL);
+	}
 }

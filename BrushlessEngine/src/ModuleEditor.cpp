@@ -15,6 +15,8 @@
 #include "GameObject.h"
 #include "BrushlessScene.h"
 #include "MeshFilter.h"
+#include "BrushlessNode.h"
+#include "Transform.h"
 
 #include <iostream>
 
@@ -82,7 +84,8 @@ bool ModuleEditor::Start()
 	glewInit();
 
 	InitializeUI();
-	LoadScene("Assets/BakerHouse.fbx");
+	//LoadScene("Assets/BakerHouse.fbx");
+	LoadScene("Assets/monkey.fbx");
 
 	return ret;
 }
@@ -183,17 +186,35 @@ void ModuleEditor::RemoveComponent(UIComponent* component)
 
 void ModuleEditor::LoadScene(const char* path)
 {
-
 	if (currentScene == nullptr) currentScene = new BrushlessScene();
 
-	std::vector<BrushlessMesh*> meshes = App->import->ImportScene(path);
-	for (int i = 0; i < meshes.size(); i++) {
-		GameObject* object = new GameObject(App, "New GameObject", true);
-		MeshFilter* meshFilter = (MeshFilter*)object->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
-		meshFilter->mesh = meshes[i];
-		object->Init();
-		currentScene->objects.push_back(object);
+	BrushlessNode* node = App->import->ImportScene(path);
+	GameObject* object = CreateGameObject(node);
+	currentScene->objects.push_back(object);
+}
+
+GameObject* ModuleEditor::CreateGameObject(BrushlessNode* node, GameObject* parent)
+{
+	GameObject* object = new GameObject(App, "New GameObject", true);
+	object->parent = parent;
+	MeshFilter* meshFilter = (MeshFilter*)object->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
+
+	for (int i = 0; i < node->meshes.size(); i++)
+	{
+		meshFilter->meshes.push_back(node->meshes[i]);
 	}
+
+	object->Init();
+
+	for (int i = 0; i < node->children.size(); i++)
+	{
+		object->children.push_back(CreateGameObject(node->children[i], object));
+	}
+
+	Transform* transform = (Transform*)object->GetComponent(Component::COMPONENT_TYPE::TRANSFORM);
+	transform->transform = float4x4(node->rot, node->position);
+
+	return object;
 }
 
 bool ModuleEditor::CleanUp()

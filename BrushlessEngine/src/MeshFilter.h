@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "BrushlessMesh.h"
+#include <vector>
 
 class Application;
 
@@ -11,5 +12,5 @@ public:
 
 	void Init();
 
-	BrushlessMesh* mesh;
+	std::vector<BrushlessMesh*> meshes;
 };

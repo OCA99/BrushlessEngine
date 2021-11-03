@@ -11,6 +11,9 @@
 
 class UIComponent;
 class BrushlessScene;
+class GameObject;
+class BrushlessMesh;
+class BrushlessNode;
 
 struct BrushlessLog {
 	std::vector<std::string>* consoleLogs = new std::vector<std::string>();
@@ -127,6 +130,7 @@ public:
 	void RemoveComponent(UIComponent* component);
 
 	void LoadScene(const char* path);
+	GameObject* CreateGameObject(BrushlessNode* node, GameObject* parent = nullptr);
 
 	bool CleanUp();
 

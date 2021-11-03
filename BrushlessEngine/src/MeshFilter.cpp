@@ -8,5 +8,8 @@ MeshFilter::MeshFilter(Application* app, GameObject* gameObject) : Component(app
 
 void MeshFilter::Init()
 {
-	mesh->InitializeBuffers();
+	for (int i = 0; i < meshes.size(); i++)
+	{
+		meshes[i]->InitializeBuffers();
+	}
 }

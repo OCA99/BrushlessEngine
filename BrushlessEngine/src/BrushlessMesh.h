@@ -33,4 +33,6 @@ public:
 
 	unsigned int textureBuffer = 0;
 	float* textureCoordinates = nullptr;
+
+	std::vector<BrushlessMesh*> children;
 };

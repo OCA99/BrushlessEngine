@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "glmath.h"
+#include "libraries/MathGeoLib/include/Math/float4x4.h"
 
 class Application;
 
@@ -9,5 +10,5 @@ class Transform : public Component {
 public:
 	Transform(Application* app, GameObject* gameObject);
 
-	mat4x4 transform;
+	float4x4 transform;
 };

@@ -25,6 +25,9 @@ public:
 
 	std::vector<Component*> components;
 
+	GameObject* parent = nullptr;
+	std::vector<GameObject*> children;
+
 	std::string name;
 	bool active;
 };

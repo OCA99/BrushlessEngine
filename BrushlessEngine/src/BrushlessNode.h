@@ -1,0 +1,27 @@
+#pragma once
+
+#include "glmath.h"
+#include "Color.h"
+#include "Component.h"
+#include <vector>
+#include "glmath.h"
+#include "libraries/MathGeoLib/include/Math/float3.h"
+#include "libraries/MathGeoLib/include/Math/Quat.h"
+
+
+class BrushlessMesh;
+
+class BrushlessNode
+{
+public:
+
+	BrushlessNode();
+	virtual	~BrushlessNode();
+
+	std::vector<BrushlessNode*> children;
+	std::vector<BrushlessMesh*> meshes;
+
+	float3 position;
+	float3 scale;
+	Quat rot;
+};

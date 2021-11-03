@@ -39,17 +39,13 @@ bool ModuleImport::CleanUp()
 	return true;
 }
 
-std::vector<BrushlessMesh*> ModuleImport::ImportScene(const char* path)
+BrushlessNode* ModuleImport::ImportScene(const char* path)
 {
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
-	std::vector<BrushlessMesh*> meshList;
+	BrushlessNode* node = nullptr;
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		for (uint i = 0; i < scene->mNumMeshes; i++)
-		{
-			BrushlessMesh* mesh = ImportMesh(scene->mMeshes[i]);
-			if (mesh != nullptr) meshList.push_back(mesh);
-		}
+		node = ImportNode(scene->mRootNode, scene);
 		aiReleaseImport(scene);
 	}
 	else
@@ -57,7 +53,37 @@ std::vector<BrushlessMesh*> ModuleImport::ImportScene(const char* path)
 		App->editor->state.log.LOG("%s failed to load", path);
 	}
 
-	return meshList;
+	return node;
+}
+
+BrushlessNode* ModuleImport::ImportNode(aiNode* node, const aiScene* scene)
+{
+	BrushlessNode* result = new BrushlessNode();
+
+	for (int i = 0; i < node->mNumMeshes; i++)
+	{
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		result->meshes.push_back(ImportMesh(mesh));
+	}
+
+	std::vector<BrushlessNode*> children;
+	for (int i = 0; i < node->mNumChildren; i++)
+	{
+		children.push_back(ImportNode(node->mChildren[i], scene));
+	}
+
+	result->children = children;
+
+	aiVector3D translation, scaling;
+	aiQuaternion rotation;
+
+	node->mTransformation.Decompose(scaling, rotation, translation);
+
+	result->position = float3(translation.x, translation.y, translation.z);
+	result->scale = float3(scaling.x, scaling.y, scaling.z);
+	result->rot = Quat(rotation.x, rotation.y, rotation.z, rotation.w);
+
+	return result;
 }
 
 BrushlessMesh* ModuleImport::ImportMesh(aiMesh* aiMesh)

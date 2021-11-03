@@ -43,6 +43,11 @@ void GameObject::Update(float dt)
 	{
 		c->Update(dt);
 	}
+
+	for (auto child : children)
+	{
+		child->Update(dt);
+	}
 }
 
 void GameObject::PostUpdate()
@@ -50,6 +55,11 @@ void GameObject::PostUpdate()
 	for (auto c : components)
 	{
 		c->PostUpdate();
+	}
+
+	for (auto child : children)
+	{
+		child->PostUpdate();
 	}
 }
 
