@@ -30,6 +30,7 @@ bool ModuleImport::Start()
 	ilInit();
 	iluInit();
 	ilutInit();
+	
 	ilutRenderer(ILUT_OPENGL);
 	return true;
 }
