@@ -74,87 +74,94 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	//rotation with reference
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_STATE::KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_REPEAT)
 	{
-		int dx = -App->input->GetMouseXMotion();
-		int dy = -App->input->GetMouseYMotion();
-
-		float Sensitivity = 0.4f;
-
-		Position -= Reference;
-
-		if (dx != 0)
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_STATE::KEY_REPEAT)
 		{
-			float DeltaX = (float)dx * Sensitivity;
+			int dx = -App->input->GetMouseXMotion();
+			int dy = -App->input->GetMouseYMotion();
 
-			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+			float Sensitivity = 0.4f;
+
+			Position -= Reference;
+
+			if (dx != 0)
+			{
+				float DeltaX = (float)dx * Sensitivity;
+
+				X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+			}
+
+			if (dy != 0)
+			{
+				float DeltaY = (float)dy * Sensitivity;
+
+				Y = rotate(Y, DeltaY, X);
+				Z = rotate(Z, DeltaY, X);
+			}
+
+			Position = Reference + Z * length(Position);
+			distancePositionReference = length(Position);
 		}
-
-		if (dy != 0)
-		{
-			float DeltaY = (float)dy * Sensitivity;
-
-			Y = rotate(Y, DeltaY, X);
-			Z = rotate(Z, DeltaY, X);
-		}
-
-		Position = Reference + Z * length(Position);
-		distancePositionReference = length(Position);
 	}
 
 
 	//rotation 
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_IDLE && App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_IDLE)
 	{
-		int dx = -App->input->GetMouseXMotion();
-		int dy = -App->input->GetMouseYMotion();
-
-		float Sensitivity = 0.2f;
-		
-
-		if (dx != 0)
+		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
 		{
-			float DeltaX = (float)dx * Sensitivity;
+			int dx = -App->input->GetMouseXMotion();
+			int dy = -App->input->GetMouseYMotion();
 
-			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			//Sensitivity -= DeltaX;
-		}
+			float Sensitivity = 0.2f;
 
-		if (dy != 0)
-		{
-			float DeltaY = (float)dy * Sensitivity;
 
-			Y = rotate(Y, DeltaY, X);
-			Z = rotate(Z, DeltaY, X);
-
-			if (Y.y < 0.0f)
+			if (dx != 0)
 			{
-				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				Y = cross(Z, X);
-			}
-			
-		}
-	}
-	else
-	{
-		//Zoom with Mouse Scroll
-		float speed = 15.0f * dt;
-		if (App->input->GetMouseZ() > 0)
-		{
-			distancePositionReference -= speed;
-			Position = Reference + Z * distancePositionReference;
-		}
-		if (App->input->GetMouseZ() < 0)
-		{
-			distancePositionReference += speed;
-			Position = Reference + Z * distancePositionReference;
-		}
+				float DeltaX = (float)dx * Sensitivity;
 
+				X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				//Sensitivity -= DeltaX;
+			}
+
+			if (dy != 0)
+			{
+				float DeltaY = (float)dy * Sensitivity;
+
+				Y = rotate(Y, DeltaY, X);
+				Z = rotate(Z, DeltaY, X);
+
+				if (Y.y < 0.0f)
+				{
+					Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+					Y = cross(Z, X);
+				}
+
+			}
+		}
+		else
+		{
+			//Zoom with Mouse Scroll
+			float speed = 15.0f * dt;
+			if (App->input->GetMouseZ() > 0)
+			{
+				distancePositionReference -= speed;
+				Position = Reference + Z * distancePositionReference;
+			}
+			if (App->input->GetMouseZ() < 0)
+			{
+				distancePositionReference += speed;
+				Position = Reference + Z * distancePositionReference;
+			}
+
+		}
 	}
+	
 
 	//ZOOM
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_REPEAT)
