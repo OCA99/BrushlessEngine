@@ -3,6 +3,7 @@
 #include "ModuleInput.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleEditor.h"
+#include "ModuleImport.h"
 
 #include "StringEndsWith.h"
 #include "GameObject.h"
@@ -127,7 +128,7 @@ update_status ModuleInput::PreUpdate(float dt)
 					{
 						App->editor->state.log.LOG("Dropped texture: %s", path.c_str());
 						textureComponent = (Texture*)App->editor->selectedObject->GetComponent(Component::COMPONENT_TYPE::TEXTURE);
-						textureComponent->SetTexture(path);
+						textureComponent->SetTexture(App->import->ImportTexture(path.c_str()));
 					}
 				}
 

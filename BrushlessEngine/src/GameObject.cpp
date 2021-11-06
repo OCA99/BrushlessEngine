@@ -16,7 +16,7 @@ GameObject::GameObject(Application* app, std::string name, bool active = true) {
 	AddComponent(new MeshFilter(app, this));
 	AddComponent(new MeshRenderer(app, this));
 	AddComponent(new Texture(app, this));
-	((Texture*)GetComponent(Component::COMPONENT_TYPE::TEXTURE))->SetTexture("Assets/Textures/Lenna.png");
+	((Texture*)GetComponent(Component::COMPONENT_TYPE::TEXTURE))->SetTexture(app->import->ImportTexture(nullptr));
 }
 
 GameObject::~GameObject()

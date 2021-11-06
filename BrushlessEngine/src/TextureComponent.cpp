@@ -7,8 +7,46 @@
 
 #include "libraries/imgui/imgui.h"
 
+Texture::Texture(bool active) : Component(app, gameObject, Component::COMPONENT_TYPE::TEXTURE)
+{
+	type = COMPONENT_TYPE::TEXTURE;
+
+	texturePath = "Assets/Textures/";
+	textureId = -1;
+	textureBuf = -1;
+	format = -1;
+	formatUnsigned = -1;
+	data = nullptr;
+	width = -1;
+	height = -1;
+}
+
 Texture::Texture(Application* app, GameObject* gameObject) : Component(app, gameObject, Component::COMPONENT_TYPE::TEXTURE)
 {
+	type = COMPONENT_TYPE::TEXTURE;
+
+	texturePath = "Assets/Textures/";
+	textureId = -1;
+	textureBuf = -1;
+	format = -1;
+	formatUnsigned = -1;
+	data = nullptr;
+	width = -1;
+	height = -1;
+}
+
+Texture::Texture(std::string n, std::string p, unsigned int texId, unsigned int texBuf, int f, unsigned int fUnsigned, GLubyte* d, int w, int h, bool active) : Component(app, gameObject, Component::COMPONENT_TYPE::TEXTURE)
+{
+	type = COMPONENT_TYPE::TEXTURE;
+
+	texturePath = p;
+	textureId = texId;
+	textureBuf = texBuf;
+	format = f;
+	formatUnsigned = fUnsigned;
+	data = d;
+	width = w;
+	height = h;
 }
 
 Texture::~Texture()
@@ -61,7 +99,7 @@ void Texture::SetTexture(std::string path)
 	DeleteTexture();
 
 	glGenTextures(1, &textureId);
-	unsigned int id = app->import->ImportTexture(textureId, path.c_str());
+	//unsigned int id = app->import->ImportTexture(textureId, path.c_str());
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glBindTexture(GL_TEXTURE_2D, textureId);
@@ -79,7 +117,56 @@ void Texture::SetTexture(std::string path)
 	texturePath = path;
 }
 
-void Texture::SetCheckerboxTexture()
+bool Texture::SetTexture(Texture* texture)
+{
+	if (texture != nullptr && texture->data != nullptr)
+	{
+		texturePath = texture->texturePath;
+		textureId = texture->textureId;
+		format = texture->format;
+		formatUnsigned = texture->formatUnsigned;
+		width = texture->width;
+		height = texture->height;
+
+		BindTexture(texture->data);
+
+		data = texture->data;
+		return true;
+	}
+	else
+	{
+		SetDefaultTexture();
+		return false;
+	}
+}
+
+void Texture::BindTexture(GLubyte* texData)
+{
+	glGenTextures(1, &textureId);
+	glBindTexture(GL_TEXTURE_2D, textureId);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, formatUnsigned, GL_UNSIGNED_BYTE, texData);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Texture::SetDefaultTexture()
+{
+	name = "defaultTex";
+	texturePath = "Assets/Textures/";
+	format = GL_RGBA;
+	formatUnsigned = GL_RGBA;
+	width = 32;
+	height = 32;
+	data = SetCheckerboxTexture();
+}
+
+GLubyte* Texture::SetCheckerboxTexture()
 {
 	GLubyte texture[32][32][4];
 
@@ -94,6 +181,7 @@ void Texture::SetCheckerboxTexture()
 	}
 
 	SetTexture(texture, 32, 32);
+	return (GLubyte*)texture;
 }
 
 void Texture::DeleteTexture()

@@ -1,15 +1,18 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleImport.h"
+#include "Gameobject.h"
 #include "ModuleEditor.h"
+#include "TextureComponent.h"
+
+#include "il.h"
+#include "ilu.h"
+#include "ilut.h"
 
 #include "cimport.h"
 #include "scene.h"
 #include "postprocess.h"
 
-#include "devil_cpp_wrapper.hpp"
-
-#include "glew.h"
 
 ModuleImport::ModuleImport(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -145,12 +148,53 @@ BrushlessMesh* ModuleImport::ImportMesh(aiMesh* aiMesh)
 	return nullptr;
 }
 
-unsigned int ModuleImport::ImportTexture(unsigned int id, const char* path)
+Texture* ModuleImport::ImportTexture(const char* path)
 {
-	wchar_t* wpath = GetWC(path);
+	uint id = 0;
+	ilGenImages(1, &id);
 	ilBindImage(id);
-	unsigned int textureId = ilutGLLoadImage(wpath);
-	return textureId;
+
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+
+	Texture* texture = new Texture();
+
+	if (id == 0)
+		App->editor->state.log.LOG("Error");
+
+	if (ilLoadImage((const ILstring)path))
+	{
+		if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
+		{
+			ILenum error = ilGetError();
+
+			if (error != IL_NO_ERROR)
+			{
+				App->editor->state.log.LOG("Texture error: %d, %s", error, iluErrorString(error));
+			}
+			else
+			{
+				App->editor->state.log.LOG("Texture loaded successfully from: %s", path);
+
+				texture->textureId = id;
+				texture->data = ilGetData();
+				texture->width = ilGetInteger(IL_IMAGE_WIDTH);
+				texture->height = ilGetInteger(IL_IMAGE_HEIGHT);
+				texture->format = texture->formatUnsigned = ilGetInteger(IL_IMAGE_FORMAT);
+				texture->texturePath = path;
+			}
+		}
+		else
+		{
+			App->editor->state.log.LOG("Error converting texture: %d, %s", ilGetError(), iluErrorString(ilGetError()));
+		}
+	}
+	else
+	{
+		App->editor->state.log.LOG("Error loading the texture from %s: %d, %s", path, ilGetError(), iluErrorString(ilGetError()));
+	}
+
+	return texture;
 }
 
 wchar_t* ModuleImport::GetWC(const char* c)
