@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCamera3D.h"
 #include "ModuleInput.h"
+#include "ModuleEditor.h"
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -167,19 +168,36 @@ update_status ModuleCamera3D::Update(float dt)
 	{
 		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
 		{
+			float speed = 20.0f * dt;
 			int dx = -App->input->GetMouseXMotion();
 			int dy = -App->input->GetMouseYMotion();
 
-			float Sensitivity = 0.2f;
-
-			if (dx != 0 && dx > 0)
+			if (dx != 0)
 			{
-				float DeltaX = (float)dx * Sensitivity;
-
-				Position = Reference + Z * length(Position) + DeltaX;
-				
+				if (dx > 0)
+				{
+					distancePositionReference -= speed;
+					Position = Reference + Z * distancePositionReference;
+				}
+				if (dx < 0)
+				{
+					distancePositionReference += speed;
+					Position = Reference + Z * distancePositionReference;
+				}
 			}
-
+			if (dy != 0)
+			{
+				if (dy > 0)
+				{
+					distancePositionReference -= speed;
+					Position = Reference + Z * distancePositionReference;
+				}
+				if (dy < 0)
+				{
+					distancePositionReference += speed;
+					Position = Reference + Z * distancePositionReference;
+				}
+			}
 		}
 	}
 	
