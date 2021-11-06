@@ -30,4 +30,5 @@ private:
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;
 	vec3 cameraOffset;
+	float distancePositionReference;
 };

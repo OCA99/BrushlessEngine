@@ -12,10 +12,11 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
+	distancePositionReference = 0.0f;
 	cameraOffset = { 0.f, 4.f, 0.f };
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
-	LookAtReference = vec3(0.0f, 0.0f, 0.0f);
+	
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -47,7 +48,7 @@ update_status ModuleCamera3D::Update(float dt)
 		speed = 3.0f * dt;
 
 	//// Mouse motion ----------------
-	if(App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT)
+	if(App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_STATE::KEY_REPEAT)
 	{
 		int dx = App->input->GetMouseXMotion();
 		int dy = App->input->GetMouseYMotion();
@@ -72,7 +73,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	//rotation with reference
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_STATE::KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
@@ -97,19 +98,21 @@ update_status ModuleCamera3D::Update(float dt)
 			Y = rotate(Y, DeltaY, X);
 			Z = rotate(Z, DeltaY, X);
 
-			if (Y.y < 0.0f)
+			//stopping the rotation at y.y = 0 disabled for real 360's
+			/*if (Y.y < 0.0f)
 			{
 				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
 				Y = cross(Z, X);
-			}
+			}*/
 		}
 
 		Position = Reference + Z * length(Position);
+		distancePositionReference = length(Position);
 	}
 
 
-	//rotation look at
-	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+	//rotation 
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_IDLE && App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
@@ -141,11 +144,43 @@ update_status ModuleCamera3D::Update(float dt)
 			}
 			
 		}
+	}
+	else
+	{
+		//Zoom with Mouse Scroll
+		float speed = 15.0f * dt;
+		if (App->input->GetMouseZ() > 0)
+		{
+			distancePositionReference -= speed;
+			Position = Reference + Z * distancePositionReference;
+		}
+		if (App->input->GetMouseZ() < 0)
+		{
+			distancePositionReference += speed;
+			Position = Reference + Z * distancePositionReference;
+		}
 
-		//Position = Reference - Z * length(Position);
 	}
 
+	//ZOOM
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT)
+	{
+		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
+		{
+			int dx = -App->input->GetMouseXMotion();
+			int dy = -App->input->GetMouseYMotion();
 
+			float Sensitivity = 0.2f;
+
+			if (dx != 0 && dx > 0)
+			{
+				float DeltaX = (float)dx * Sensitivity;
+
+				Position = Reference + Z * length(Position) + DeltaX;
+				
+			}
+		}
+	}
 	
 
 	// Recalculate matrix -------------
@@ -209,3 +244,4 @@ void ModuleCamera3D::CalculateViewMatrix()
 	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
 }
+
