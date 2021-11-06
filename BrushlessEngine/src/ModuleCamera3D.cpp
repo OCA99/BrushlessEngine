@@ -74,7 +74,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	//rotation with reference
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_STATE::KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_STATE::KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
@@ -98,13 +98,6 @@ update_status ModuleCamera3D::Update(float dt)
 
 			Y = rotate(Y, DeltaY, X);
 			Z = rotate(Z, DeltaY, X);
-
-			//stopping the rotation at y.y = 0 disabled for real 360's
-			/*if (Y.y < 0.0f)
-			{
-				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				Y = cross(Z, X);
-			}*/
 		}
 
 		Position = Reference + Z * length(Position);
@@ -113,7 +106,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 
 	//rotation 
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_IDLE && App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_IDLE && App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_IDLE && App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
@@ -164,7 +157,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	//ZOOM
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_STATE::KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RSHIFT) == KEY_STATE::KEY_REPEAT)
 	{
 		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_STATE::KEY_REPEAT)
 		{
