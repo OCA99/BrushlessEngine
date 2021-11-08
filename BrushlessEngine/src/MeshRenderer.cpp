@@ -186,4 +186,5 @@ void MeshRenderer::DrawFaceNormals()
 		glColor3f(1.0f, 1.0f, 1.0f);
 
 	}
+
 }

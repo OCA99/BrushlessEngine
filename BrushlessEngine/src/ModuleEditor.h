@@ -9,6 +9,8 @@
 #include "glmath.h"
 #include "LogStream.hpp"
 
+#include "BrushlessMesh.h"
+
 class UIComponent;
 class BrushlessScene;
 class GameObject;
@@ -133,6 +135,7 @@ public:
 
 	void LoadScene(const char* path);
 	GameObject* CreateGameObject(BrushlessNode* node, GameObject* parent = nullptr);
+	GameObject* CreatePrimitive(BrushlessMesh::Primitives type);
 
 	bool CleanUp();
 

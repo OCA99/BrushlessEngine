@@ -3,6 +3,7 @@
 #include "Component.h"
 
 class Application;
+class GameObject;
 
 class MeshRenderer : public Component {
 public:
@@ -31,4 +32,13 @@ private:
 	};
 
 	Settings settings;
+
+
 };
+
+
+
+
+
+
+

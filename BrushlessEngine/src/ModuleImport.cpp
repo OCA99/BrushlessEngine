@@ -33,6 +33,7 @@ bool ModuleImport::Start()
 	ilInit();
 	iluInit();
 	ilutInit();
+	App->editor->state.log.LOG("ilu Initialized");
 	
 	ilutRenderer(ILUT_OPENGL);
 	return true;

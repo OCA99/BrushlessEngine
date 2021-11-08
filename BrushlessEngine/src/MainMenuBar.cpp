@@ -35,6 +35,26 @@ update_status MainMenuBar::Update() {
 		ImGui::MenuItem("Console", nullptr, &app->editor->state.consoleWindowOpen);
 		ImGui::EndMenu();
 	}
+	if (ImGui::BeginMenu("Primitives"))
+	{
+		bool plane, cube, pyramid, cylinder;
+
+		plane = cube = pyramid = cylinder = false;
+
+		ImGui::MenuItem("Plane", nullptr, &plane);
+		ImGui::MenuItem("Cube", nullptr, &cube);
+		ImGui::MenuItem("Pyramid", nullptr, &pyramid);
+		ImGui::MenuItem("Cylinder", nullptr, &cylinder);
+
+		if (plane) app->editor->CreatePrimitive(BrushlessMesh::Primitives::Primitive_Plane);
+		if (cube) app->editor->CreatePrimitive(BrushlessMesh::Primitives::Primitive_Cube);
+		if (pyramid) app->editor->CreatePrimitive(BrushlessMesh::Primitives::Primitive_Pyramid);
+		if (cylinder) app->editor->CreatePrimitive(BrushlessMesh::Primitives::Primitive_Cylinder);
+
+		plane = cube = pyramid = cylinder = false;
+
+		ImGui::EndMenu();
+	}
 	if (ImGui::BeginMenu("Help"))
 	{
 		ImGui::MenuItem("Demo", nullptr, &app->editor->state.demoWindowOpen);

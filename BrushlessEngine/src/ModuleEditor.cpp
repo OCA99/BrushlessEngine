@@ -28,8 +28,6 @@
 #include "libraries/imgui/imgui_impl_opengl2.h"
 #include <gl/GL.h>
 
-#include "libraries/json/json.hpp"
-
 #include "Logger.hpp"
 #include "DefaultLogger.hpp"
 
@@ -87,6 +85,7 @@ bool ModuleEditor::Start()
 
 	InitializeUI();
 	LoadScene("Assets/BakerHouse.fbx");
+
 	//LoadScene("Assets/monkey.fbx");
 
 	return ret;
@@ -217,6 +216,36 @@ GameObject* ModuleEditor::CreateGameObject(BrushlessNode* node, GameObject* pare
 	transform->transform = float4x4(node->rot, node->position);
 
 	object->name = node->name;
+
+	return object;
+}
+
+GameObject* ModuleEditor::CreatePrimitive(BrushlessMesh::Primitives type)
+{
+	GameObject* object = new GameObject(App, "New GameObject", true);
+	MeshFilter* meshFilter = (MeshFilter*)object->GetComponent(Component::COMPONENT_TYPE::MESH_FILTER);
+
+	switch (type)
+	{
+	case BrushlessMesh::Primitives::Primitive_Plane:
+		meshFilter->meshes.push_back(new PrimitivePlane());
+		break;
+	case BrushlessMesh::Primitives::Primitive_Cylinder:
+		meshFilter->meshes.push_back(new PrimitiveCylinder());
+		break;
+	case BrushlessMesh::Primitives::Primitive_Pyramid:
+		meshFilter->meshes.push_back(new PrimitivePyramid());
+		break;
+	case BrushlessMesh::Primitives::Primitive_Cube:
+		meshFilter->meshes.push_back(new PrimitiveCube());
+		break;
+	default:
+		break;
+	}
+
+	object->Init();
+
+	currentScene->objects.push_back(object);
 
 	return object;
 }
